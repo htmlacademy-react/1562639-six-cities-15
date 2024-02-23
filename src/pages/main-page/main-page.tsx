@@ -4,6 +4,7 @@ import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
 import { CARDS_MOCK } from '../../constants/cards-mock';
 import { ComponentEnvironment } from '../../constants/const';
+import { Helmet } from 'react-helmet-async';
 
 type MainPageProps = {
   resultCount: number;
@@ -12,6 +13,9 @@ type MainPageProps = {
 function MainPage({resultCount} : MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>Все предложения</title>
+      </Helmet>
       <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>

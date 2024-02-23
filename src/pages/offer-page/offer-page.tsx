@@ -4,11 +4,15 @@ import OfferInside from '../../components/offers/offer-inside/offer-inside';
 import NearPlaces from '../../components/offers/near-places/near-places';
 import Map from '../../components/map/map';
 import { ComponentEnvironment } from '../../constants/const';
+import { Helmet } from 'react-helmet-async';
 
 
 function OfferPage(): JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>Подробнее о выбранном месте</title>
+      </Helmet>
       <Header />
       <main className="page__main page__main--offer">
         <section className="offer">

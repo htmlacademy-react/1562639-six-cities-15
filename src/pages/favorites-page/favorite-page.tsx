@@ -3,10 +3,14 @@ import Footer from '../../components/footer/footer';
 import PlaceCard from '../../components/place-card/place-card';
 import { CARDS_MOCK } from '../../constants/cards-mock';
 import { ComponentEnvironment } from '../../constants/const';
+import { Helmet } from 'react-helmet-async';
 
 function FavoritesPage() : JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>Избранное</title>
+      </Helmet>
       <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { PlaceCardProps } from '../../constants/cards-mock';
 
 function PlaceCard({environment, isPremium, link, image, name, price, isFavorite, rating, type}: PlaceCardProps): JSX.Element {
@@ -31,7 +32,9 @@ function PlaceCard({environment, isPremium, link, image, name, price, isFavorite
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
+            className={classNames('place-card__bookmark-button button', {
+              'place-card__bookmark-button--active' : isFavorite
+            })}
             type="button"
           >
             <svg
