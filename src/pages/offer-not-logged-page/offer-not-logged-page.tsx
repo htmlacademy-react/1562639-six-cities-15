@@ -2,7 +2,8 @@ import OfferGallery from '../../components/offers/offer-gallery/offer-gallery';
 import OfferInside from '../../components/offers/offer-inside/offer-inside';
 import NearPlaces from '../../components/offers/near-places/near-places';
 import Map from '../../components/map/map';
-import { ComponentEnvironment } from '../../constants/const';
+import { ComponentEnvironment, AppRoute } from '../../constants/const';
+import { Link } from 'react-router-dom';
 
 function OfferNotLoggedPage(): JSX.Element {
   return (
@@ -24,13 +25,13 @@ function OfferNotLoggedPage(): JSX.Element {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a
+                  <Link
                     className="header__nav-link header__nav-link--profile"
-                    href="#"
+                    to={AppRoute.Login}
                   >
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     <span className="header__login">Sign in</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
