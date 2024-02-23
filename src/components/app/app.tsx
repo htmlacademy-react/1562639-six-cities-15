@@ -1,5 +1,6 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { AppRoute } from '../../constants/const';
+import { Route, BrowserRouter, Routes, Navigate } from 'react-router-dom';
+import {PrivateRoute, PublicRoute} from '../private-route/private-route';
+import { AppRoute, AuthorizationStatus, CITIES } from '../../constants/const';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorite-page';
 import LoginPage from '../../pages/login-page/login-page';
@@ -16,15 +17,30 @@ function App({resultCount} : AppPageProps): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainPage resultCount={resultCount} />}
+          element={<Navigate to='paris' />}
         />
+        {CITIES.map((city) => (
+          <Route
+            key={city.name}
+            path={`/${city.slug}`}
+            element={<MainPage resultCount={resultCount} />}
+          />
+        ))}
         <Route
           path={AppRoute.Favorites}
-          element={<FavoritesPage />}
+          element={
+            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+              <FavoritesPage />
+            </PrivateRoute>
+          }
         />
         <Route
           path={AppRoute.Login}
-          element={<LoginPage />}
+          element={
+            <PublicRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+              <LoginPage />
+            </PublicRoute>
+          }
         />
         <Route
           path={AppRoute.Offer}
