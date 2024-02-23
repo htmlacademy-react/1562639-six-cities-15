@@ -3,6 +3,7 @@ import OfferGallery from '../../components/offers/offer-gallery/offer-gallery';
 import OfferInside from '../../components/offers/offer-inside/offer-inside';
 import NearPlaces from '../../components/offers/near-places/near-places';
 import Map from '../../components/map/map';
+import { ComponentEnvironment } from '../../constants/const';
 
 
 function OfferPage(): JSX.Element {
@@ -225,7 +226,7 @@ function OfferPage(): JSX.Element {
               </section>
             </div>
           </div>
-          <Map environment='offer' />
+          <Map environment={ComponentEnvironment.Offer} />
         </section>
         <div className="container">
           <NearPlaces />

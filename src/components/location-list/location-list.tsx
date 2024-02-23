@@ -12,7 +12,7 @@ const cities: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg'
 function LocationList(): JSX.Element {
   return (
     <ul className="locations__list tabs__list">
-      {cities.map((item) => (<LocationItem city={item} key={item}/>))}
+      {cities.map((city) => (<LocationItem city={city} key={city}/>))}
     </ul>
   );
 }
