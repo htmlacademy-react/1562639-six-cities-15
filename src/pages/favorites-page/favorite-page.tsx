@@ -2,10 +2,15 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import PlaceCard from '../../components/place-card/place-card';
 import { CARDS_MOCK } from '../../constants/cards-mock';
+import { ComponentEnvironment } from '../../constants/const';
+import { Helmet } from 'react-helmet-async';
 
 function FavoritesPage() : JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>Избранное</title>
+      </Helmet>
       <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
@@ -21,8 +26,8 @@ function FavoritesPage() : JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <PlaceCard environment='favorites' {...CARDS_MOCK[1]}/>
-                  <PlaceCard environment='favorites' {...CARDS_MOCK[3]}/>
+                  <PlaceCard environment={ComponentEnvironment.Favorites} {...CARDS_MOCK[1]}/>
+                  <PlaceCard environment={ComponentEnvironment.Favorites} {...CARDS_MOCK[3]}/>
                 </div>
               </li>
               <li className="favorites__locations-items">
@@ -34,7 +39,7 @@ function FavoritesPage() : JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <PlaceCard environment='favorites' {...CARDS_MOCK[1]}/>
+                  <PlaceCard environment={ComponentEnvironment.Favorites} {...CARDS_MOCK[1]}/>
                 </div>
               </li>
             </ul>

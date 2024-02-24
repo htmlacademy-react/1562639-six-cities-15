@@ -3,6 +3,8 @@ import LocationList from '../../components/location-list/location-list';
 import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
 import { CARDS_MOCK } from '../../constants/cards-mock';
+import { ComponentEnvironment } from '../../constants/const';
+import { Helmet } from 'react-helmet-async';
 
 type MainPageProps = {
   resultCount: number;
@@ -11,6 +13,9 @@ type MainPageProps = {
 function MainPage({resultCount} : MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>Все предложения</title>
+      </Helmet>
       <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -51,15 +56,15 @@ function MainPage({resultCount} : MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {CARDS_MOCK.map((item) =>
-                  (<PlaceCard environment='cities' key={`${item.id}`} {...item} />))}
+                {CARDS_MOCK.map((offer) =>
+                  (<PlaceCard environment={ComponentEnvironment.Cities} key={`${offer.id}`} {...offer} />))}
                 {/* Равносильно записи:
                 (<PlaceCard environment='cities' key={`${item.id}`} name={`${item.name}`} type={`${item.type}`} link={`${item.link}`} image={`${item.image}`} price={item.price} rating={`${item.rating}`} isFavorite={item.isFavorite} isPremium={item.isPremium} />))}
                 */}
               </div>
             </section>
             <div className="cities__right-section">
-              <Map environment='cities' />
+              <Map environment={ComponentEnvironment.Cities} />
             </div>
           </div>
         </div>
