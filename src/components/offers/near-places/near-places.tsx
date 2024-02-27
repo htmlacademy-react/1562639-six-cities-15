@@ -1,5 +1,5 @@
 import PlaceCard from '../../place-card/place-card';
-import { CARDS_MOCK } from '../../../constants/cards-mock';
+import { CARDS_MOCK } from '../../../mock/cards-mock';
 import { ComponentEnvironment } from '../../../constants/const';
 
 function NearPlaces(): JSX.Element {

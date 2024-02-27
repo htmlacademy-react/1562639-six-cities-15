@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { PlaceCardProps } from '../../constants/cards-mock';
+import { PlaceCardProps } from '../../mock/cards-mock';
 
 function PlaceCard({environment, isPremium, link, image, name, price, isFavorite, rating, type}: PlaceCardProps): JSX.Element {
   const imageSize = {

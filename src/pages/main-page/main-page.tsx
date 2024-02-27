@@ -2,7 +2,7 @@ import Header from '../../components/header/header';
 import LocationList from '../../components/location-list/location-list';
 import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
-import { CARDS_MOCK } from '../../constants/cards-mock';
+import { CARDS_MOCK } from '../../mock/cards-mock';
 import { ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
 

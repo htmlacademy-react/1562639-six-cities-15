@@ -7,12 +7,14 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { HelmetProvider } from 'react-helmet-async';
+import { PlaceCardProps } from '../../mock/cards-mock';
 
 type AppPageProps = {
   resultCount: number;
+  cards: PlaceCardProps;
 }
 
-function App({ resultCount }: AppPageProps): JSX.Element {
+function App({ resultCount, cards }: AppPageProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
