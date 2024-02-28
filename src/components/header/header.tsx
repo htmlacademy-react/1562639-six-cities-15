@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Logo from '../logo/logo';
-import { ComponentEnvironment, AppRoute } from '../../constants/const';
+import { AppRoute } from '../../constants/const';
 
 function Header(): JSX.Element {
   return (
@@ -8,7 +8,7 @@ function Header(): JSX.Element {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo environment={ComponentEnvironment.Header} />
+            <Logo width={81} height={41} />
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">

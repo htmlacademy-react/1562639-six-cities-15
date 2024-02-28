@@ -1,10 +1,9 @@
 import Logo from '../logo/logo';
-import { ComponentEnvironment } from '../../constants/const';
 
 function Footer(): JSX.Element {
   return (
     <footer className="footer container">
-      <Logo environment={ComponentEnvironment.Footer} />
+      <Logo width={64} height={33} />
     </footer>
   );
 }
