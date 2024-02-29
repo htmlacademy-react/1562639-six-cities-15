@@ -2,7 +2,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { AppRoute, CITIES } from '../../constants/const';
 
 type LogoProps = {
-  // environment: string;
   width: number;
   height: number;
 }
@@ -10,7 +9,7 @@ type LogoProps = {
 const cityLinks = CITIES.map((city) => `/${city.slug}`);
 
 
-function Logo({ width, height }: LogoProps): JSX.Element {
+function Logo({ width, height }: LogoProps) {
   const logoImage = <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={width} height={height} />;
 
   const location = useLocation();

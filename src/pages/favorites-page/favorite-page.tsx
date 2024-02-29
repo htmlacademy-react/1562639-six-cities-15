@@ -1,11 +1,15 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import PlaceCard from '../../components/place-card/place-card';
-import { CARDS_MOCK } from '../../mock/cards-mock';
+import { PlaceCardProps } from '../../mock/cards-mock';
 import { ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
 
-function FavoritesPage() : JSX.Element {
+type FavoritesPageProps = {
+  offersArray: PlaceCardProps[];
+}
+
+function FavoritesPage({offersArray} : FavoritesPageProps) : JSX.Element {
   return (
     <div className="page">
       <Helmet>
@@ -26,8 +30,8 @@ function FavoritesPage() : JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <PlaceCard environment={ComponentEnvironment.Favorites} {...CARDS_MOCK[1]}/>
-                  <PlaceCard environment={ComponentEnvironment.Favorites} {...CARDS_MOCK[3]}/>
+                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offersArray[1]}/>
+                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offersArray[3]}/>
                 </div>
               </li>
               <li className="favorites__locations-items">
@@ -39,7 +43,7 @@ function FavoritesPage() : JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <PlaceCard environment={ComponentEnvironment.Favorites} {...CARDS_MOCK[1]}/>
+                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offersArray[1]}/>
                 </div>
               </li>
             </ul>

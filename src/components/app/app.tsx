@@ -11,10 +11,10 @@ import { PlaceCardProps } from '../../mock/cards-mock';
 
 type AppPageProps = {
   resultCount: number;
-  cards: PlaceCardProps;
+  offersArray: PlaceCardProps[];
 }
 
-function App({ resultCount, cards }: AppPageProps): JSX.Element {
+function App({ resultCount, offersArray }: AppPageProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -27,14 +27,14 @@ function App({ resultCount, cards }: AppPageProps): JSX.Element {
             <Route
               key={city.name}
               path={`/${city.slug}`}
-              element={<MainPage resultCount={resultCount} />}
+              element={<MainPage resultCount={resultCount} offersArray={offersArray} />}
             />
           ))}
           <Route
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-                <FavoritesPage />
+                <FavoritesPage offersArray={offersArray} />
               </PrivateRoute>
             }
           />
@@ -48,7 +48,7 @@ function App({ resultCount, cards }: AppPageProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage />}
+            element={<OfferPage offersArray={offersArray} />}
           />
           <Route
             path="*"

@@ -12,7 +12,7 @@ root.render(
   <React.StrictMode>
     <App
       resultCount={Setting.ResultCount}
-      cards={CARDS_MOCK}
+      offersArray={CARDS_MOCK}
     />
   </React.StrictMode>
 );

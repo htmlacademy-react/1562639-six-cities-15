@@ -1,16 +1,18 @@
 import Header from '../../components/header/header';
 import LocationList from '../../components/location-list/location-list';
-import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
-import { CARDS_MOCK } from '../../mock/cards-mock';
 import { ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
+import { PlaceCardProps } from '../../mock/cards-mock';
+import OffersList from '../../components/offers/offers-list/offers-list';
+
 
 type MainPageProps = {
   resultCount: number;
+  offersArray: PlaceCardProps[];
 }
 
-function MainPage({resultCount} : MainPageProps): JSX.Element {
+function MainPage({ resultCount, offersArray }: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -55,13 +57,7 @@ function MainPage({resultCount} : MainPageProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {CARDS_MOCK.map((offer) =>
-                  (<PlaceCard environment={ComponentEnvironment.Cities} key={`${offer.id}`} {...offer} />))}
-                {/* Равносильно записи:
-                (<PlaceCard environment='cities' key={`${item.id}`} name={`${item.name}`} type={`${item.type}`} link={`${item.link}`} image={`${item.image}`} price={item.price} rating={`${item.rating}`} isFavorite={item.isFavorite} isPremium={item.isPremium} />))}
-                */}
-              </div>
+              <OffersList offersArray={offersArray} />
             </section>
             <div className="cities__right-section">
               <Map environment={ComponentEnvironment.Cities} />

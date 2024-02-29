@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import { PlaceCardProps } from '../../mock/cards-mock';
+import { Link } from 'react-router-dom';
 
-function PlaceCard({environment, isPremium, link, image, name, price, isFavorite, rating, type}: PlaceCardProps): JSX.Element {
+function PlaceCard({environment, isPremium, link, image, name, price, isFavorite, rating, type, id}: PlaceCardProps): JSX.Element {
   const imageSize = {
     width: ((environment === 'cities') || (environment === 'near-places')) ? 260 : 150,
     height: ((environment === 'cities') || (environment === 'near-places')) ? 200 : 110,
@@ -54,9 +55,9 @@ function PlaceCard({environment, isPremium, link, image, name, price, isFavorite
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href={link}>
+          <Link to={`/offer/${id}`}>
             {name}
-          </a>
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
