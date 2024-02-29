@@ -1,6 +1,19 @@
+import {ChangeEvent, MouseEvent, useState} from 'react';
 import FormRating from '../form-rating/form-rating';
 
-function ReviewsForm(): JSX.Element {
+function ReviewsForm() {
+  const [formData, setFormData] = useState({review: ''});
+
+  const handleCommentChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      review: evt.target.value});
+  };
+
+  const handleFormSubmit = (evt: MouseEvent<HTMLElement>) => {
+    evt.preventDefault();
+  };
+
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">
@@ -12,7 +25,7 @@ function ReviewsForm(): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={''}
+        onChange={handleCommentChange}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -24,7 +37,8 @@ function ReviewsForm(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          onClick={handleFormSubmit}
+          disabled={false}
         >
           Submit
         </button>

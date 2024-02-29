@@ -1,12 +1,21 @@
+import { ChangeEvent, useState } from 'react';
 function FormRating() {
+  const [formRating, setFormRaiting] = useState({rating: 0});
+
+  const handleRaitingChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setFormRaiting({
+      ...formRating,
+      rating: +evt.target.value});
+  };
   return (
     <div className="reviews__rating-form form__rating">
       <input
         className="form__rating-input visually-hidden"
         name="rating"
-        defaultValue={5}
+        value='5'
         id="5-stars"
         type="radio"
+        onChange={handleRaitingChange}
       />
       <label
         htmlFor="5-stars"
@@ -20,9 +29,10 @@ function FormRating() {
       <input
         className="form__rating-input visually-hidden"
         name="rating"
-        defaultValue={4}
+        value='4'
         id="4-stars"
         type="radio"
+        onChange={handleRaitingChange}
       />
       <label
         htmlFor="4-stars"
@@ -36,9 +46,10 @@ function FormRating() {
       <input
         className="form__rating-input visually-hidden"
         name="rating"
-        defaultValue={3}
+        value='3'
         id="3-stars"
         type="radio"
+        onChange={handleRaitingChange}
       />
       <label
         htmlFor="3-stars"
@@ -52,9 +63,10 @@ function FormRating() {
       <input
         className="form__rating-input visually-hidden"
         name="rating"
-        defaultValue={2}
+        value='2'
         id="2-stars"
         type="radio"
+        onChange={handleRaitingChange}
       />
       <label
         htmlFor="2-stars"
@@ -68,9 +80,10 @@ function FormRating() {
       <input
         className="form__rating-input visually-hidden"
         name="rating"
-        defaultValue={1}
+        value='1'
         id="1-star"
         type="radio"
+        onChange={handleRaitingChange}
       />
       <label
         htmlFor="1-star"
