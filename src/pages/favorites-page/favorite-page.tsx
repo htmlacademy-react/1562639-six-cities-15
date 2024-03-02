@@ -2,20 +2,21 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import PlaceCard from '../../components/place-card/place-card';
 import { PlaceCardProps } from '../../mock/cards-mock';
-import { ComponentEnvironment } from '../../constants/const';
+import { AuthorizationStatus, ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
 
 type FavoritesPageProps = {
   offersArray: PlaceCardProps[];
+  authorizationStatus: AuthorizationStatus;
 }
 
-function FavoritesPage({offersArray} : FavoritesPageProps) : JSX.Element {
+function FavoritesPage({offersArray, authorizationStatus} : FavoritesPageProps) : JSX.Element {
   return (
     <div className="page">
       <Helmet>
         <title>Избранное</title>
       </Helmet>
-      <Header />
+      <Header authorizationStatus={authorizationStatus}/>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">

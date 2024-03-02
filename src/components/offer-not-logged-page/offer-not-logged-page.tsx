@@ -1,7 +1,7 @@
-import OfferGallery from '../../components/offers/offer-gallery/offer-gallery';
-import OfferInside from '../../components/offers/offer-inside/offer-inside';
-import NearPlaces from '../../components/offers/near-places/near-places';
-import Map from '../../components/map/map';
+import OfferGallery from '../offers/offer-gallery/offer-gallery';
+import OfferInside from '../offers/offer-inside/offer-inside';
+import NearPlaces from '../offers/near-places/near-places';
+import Map from '../map/map';
 import { ComponentEnvironment, AppRoute } from '../../constants/const';
 import { Link } from 'react-router-dom';
 

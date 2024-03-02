@@ -1,5 +1,5 @@
-import Header from '../../components/header/header';
-import LocationList from '../../components/location-list/location-list';
+import Header from '../header/header';
+import LocationList from '../location-list/location-list';
 
 function MainEmptyPage(): JSX.Element {
   return (

@@ -14,7 +14,7 @@ function Logo({ width, height }: LogoProps) {
 
   const location = useLocation();
 
-  if(cityLinks.includes(location.pathname)) {
+  if(!cityLinks.includes(location.pathname)) {
     return (
       <Link className='header__logo-link' to={AppRoute.Root}>
         {logoImage}

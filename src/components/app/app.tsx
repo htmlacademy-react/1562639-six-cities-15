@@ -14,7 +14,9 @@ type AppPageProps = {
   offersArray: PlaceCardProps[];
 }
 
-function App({ resultCount, offersArray }: AppPageProps): JSX.Element {
+function App({ resultCount, offersArray}: AppPageProps): JSX.Element {
+  const authorization = AuthorizationStatus.Auth;
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -27,14 +29,14 @@ function App({ resultCount, offersArray }: AppPageProps): JSX.Element {
             <Route
               key={city.name}
               path={`/${city.slug}`}
-              element={<MainPage resultCount={resultCount} offersArray={offersArray} />}
+              element={<MainPage resultCount={resultCount} offersArray={offersArray} authorizationStatus={authorization} />}
             />
           ))}
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-                <FavoritesPage offersArray={offersArray} />
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                <FavoritesPage offersArray={offersArray} authorizationStatus={authorization} />
               </PrivateRoute>
             }
           />
@@ -48,7 +50,7 @@ function App({ resultCount, offersArray }: AppPageProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage offersArray={offersArray} />}
+            element={<OfferPage offersArray={offersArray} authorizationStatus={authorization} />}
           />
           <Route
             path="*"

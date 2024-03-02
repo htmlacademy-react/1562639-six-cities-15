@@ -3,23 +3,24 @@ import OfferGallery from '../../components/offers/offer-gallery/offer-gallery';
 import OfferInside from '../../components/offers/offer-inside/offer-inside';
 import NearPlaces from '../../components/offers/near-places/near-places';
 import Map from '../../components/map/map';
-import { ComponentEnvironment } from '../../constants/const';
+import { AuthorizationStatus, ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
 import { PlaceCardProps } from '../../mock/cards-mock';
 
 type OfferPageProps = {
   offersArray: PlaceCardProps[];
+  authorizationStatus: AuthorizationStatus;
 }
 
 
-function OfferPage({offersArray} : OfferPageProps): JSX.Element {
+function OfferPage({offersArray, authorizationStatus} : OfferPageProps): JSX.Element {
   return (
     <div className="page">
       <Helmet>
         <title>Подробнее о выбранном месте</title>
       </Helmet>
-      <Header />
+      <Header authorizationStatus={authorizationStatus} />
       <main className="page__main page__main--offer">
         <section className="offer">
           <OfferGallery />
