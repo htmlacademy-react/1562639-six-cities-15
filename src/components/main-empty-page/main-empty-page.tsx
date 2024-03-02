@@ -1,10 +1,15 @@
 import Header from '../header/header';
 import LocationList from '../location-list/location-list';
+import { AuthorizationStatus } from '../../constants/const';
 
-function MainEmptyPage(): JSX.Element {
+type MainEmptyProps = {
+  authorizationStatus: AuthorizationStatus;
+}
+
+function MainEmptyPage({authorizationStatus} : MainEmptyProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <Header />
+      <Header authorizationStatus={authorizationStatus} />
       <main className="page__main page__main--index page__main--index-empty">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

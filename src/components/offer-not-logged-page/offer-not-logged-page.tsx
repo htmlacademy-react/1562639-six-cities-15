@@ -4,8 +4,13 @@ import NearPlaces from '../offers/near-places/near-places';
 import Map from '../map/map';
 import { ComponentEnvironment, AppRoute } from '../../constants/const';
 import { Link } from 'react-router-dom';
+import { PlaceCardProps } from '../../mock/cards-mock';
 
-function OfferNotLoggedPage(): JSX.Element {
+type OfferNoLoggedPageProps = {
+  offersArray: PlaceCardProps[];
+}
+
+function OfferNotLoggedPage({offersArray} : OfferNoLoggedPageProps): JSX.Element {
   return (
     <div className="page">
       <header className="header">
@@ -148,7 +153,7 @@ function OfferNotLoggedPage(): JSX.Element {
           <Map environment={ComponentEnvironment.Offer} />
         </section>
         <div className="container">
-          <NearPlaces />
+          <NearPlaces offersArray={offersArray} />
         </div>
       </main>
     </div>
