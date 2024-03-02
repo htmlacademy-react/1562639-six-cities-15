@@ -9,12 +9,12 @@ import ReviewsForm from '../../components/reviews-form/reviews-form';
 import { PlaceCardProps } from '../../mock/cards-mock';
 
 type OfferPageProps = {
-  offersArray: PlaceCardProps[];
+  offers: PlaceCardProps[];
   authorizationStatus: AuthorizationStatus;
 }
 
 
-function OfferPage({offersArray, authorizationStatus} : OfferPageProps): JSX.Element {
+function OfferPage({offers, authorizationStatus} : OfferPageProps): JSX.Element {
   return (
     <div className="page">
       <Helmet>
@@ -132,7 +132,7 @@ function OfferPage({offersArray, authorizationStatus} : OfferPageProps): JSX.Ele
           <Map environment={ComponentEnvironment.Offer} />
         </section>
         <div className="container">
-          <NearPlaces offersArray={offersArray} />
+          <NearPlaces offers={offers} />
         </div>
       </main>
     </div>

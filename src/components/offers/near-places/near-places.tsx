@@ -3,18 +3,18 @@ import { PlaceCardProps } from '../../../mock/cards-mock';
 import { ComponentEnvironment } from '../../../constants/const';
 
 type NearPlacesProps = {
-  offersArray: PlaceCardProps[];
+  offers: PlaceCardProps[];
 }
 
-function NearPlaces({offersArray} : NearPlacesProps): JSX.Element {
+function NearPlaces({offers} : NearPlacesProps): JSX.Element {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">
         Other places in the neighbourhood
       </h2>
       <div className="near-places__list places__list">
-        {offersArray.map((offer) =>
-          (<PlaceCard environment={ComponentEnvironment.Cities} key={`${offer.id}`} {...offer} />)).slice(0,3)}
+        {offers.slice(0,3).map((offer) =>
+          (<PlaceCard environment={ComponentEnvironment.Cities} key={`${offer.id}`} {...offer} />))}
       </div>
     </section>
   );

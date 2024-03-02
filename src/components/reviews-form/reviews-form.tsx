@@ -2,12 +2,19 @@ import {ChangeEvent, MouseEvent, useState} from 'react';
 import FormRating from '../form-rating/form-rating';
 
 function ReviewsForm() {
-  const [formData, setFormData] = useState({review: ''});
+  const [formData, setFormData] = useState({review: '', rating: 0});
 
   const handleCommentChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       review: evt.target.value});
+  };
+
+  const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      rating: +evt.target.value
+    });
   };
 
   const handleFormSubmit = (evt: MouseEvent<HTMLElement>) => {
@@ -19,7 +26,7 @@ function ReviewsForm() {
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <FormRating />
+      <FormRating onChange={handleRatingChange} />
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
@@ -38,7 +45,7 @@ function ReviewsForm() {
           className="reviews__submit form__submit button"
           type="submit"
           onClick={handleFormSubmit}
-          disabled={false}
+          disabled={formData.review.length < 50 || formData.review.length > 300 || formData.rating === 0}
         >
           Submit
         </button>

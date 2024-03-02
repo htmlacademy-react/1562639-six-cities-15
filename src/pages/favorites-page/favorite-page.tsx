@@ -6,11 +6,11 @@ import { AuthorizationStatus, ComponentEnvironment } from '../../constants/const
 import { Helmet } from 'react-helmet-async';
 
 type FavoritesPageProps = {
-  offersArray: PlaceCardProps[];
+  offers: PlaceCardProps[];
   authorizationStatus: AuthorizationStatus;
 }
 
-function FavoritesPage({offersArray, authorizationStatus} : FavoritesPageProps) : JSX.Element {
+function FavoritesPage({offers, authorizationStatus} : FavoritesPageProps) : JSX.Element {
   return (
     <div className="page">
       <Helmet>
@@ -31,8 +31,8 @@ function FavoritesPage({offersArray, authorizationStatus} : FavoritesPageProps) 
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offersArray[1]}/>
-                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offersArray[3]}/>
+                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offers[1]}/>
+                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offers[3]}/>
                 </div>
               </li>
               <li className="favorites__locations-items">
@@ -44,7 +44,7 @@ function FavoritesPage({offersArray, authorizationStatus} : FavoritesPageProps) 
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offersArray[1]}/>
+                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offers[1]}/>
                 </div>
               </li>
             </ul>

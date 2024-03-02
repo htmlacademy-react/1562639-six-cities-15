@@ -10,11 +10,11 @@ import { useState } from 'react';
 
 type MainPageProps = {
   resultCount: number;
-  offersArray: PlaceCardProps[];
+  offers: PlaceCardProps[];
   authorizationStatus: AuthorizationStatus;
 }
 
-function MainPage({ resultCount, offersArray, authorizationStatus }: MainPageProps): JSX.Element {
+function MainPage({ resultCount, offers, authorizationStatus }: MainPageProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
   return (
     <div className="page page--gray page--main">
@@ -62,8 +62,8 @@ function MainPage({ resultCount, offersArray, authorizationStatus }: MainPagePro
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {offersArray.map((offer) =>
-                  (<PlaceCard environment={ComponentEnvironment.Cities} key={`${offer.id}`} {...offer} onMouseEnter={() => setActiveOfferId(offer.id)} />))}
+                {offers.map((offer) =>
+                  (<PlaceCard environment={ComponentEnvironment.Cities} key={`${offer.id}`} {...offer} onMouseEnter={() => setActiveOfferId(offer.id)} onMouseLeave={() => setActiveOfferId(null)} />))}
               </div>
             </section>
             <div className="cities__right-section">

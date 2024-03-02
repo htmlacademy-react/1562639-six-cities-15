@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 import { PlaceCardProps } from '../../mock/cards-mock';
 
 type OfferNoLoggedPageProps = {
-  offersArray: PlaceCardProps[];
+  offers: PlaceCardProps[];
 }
 
-function OfferNotLoggedPage({offersArray} : OfferNoLoggedPageProps): JSX.Element {
+function OfferNotLoggedPage({offers} : OfferNoLoggedPageProps): JSX.Element {
   return (
     <div className="page">
       <header className="header">
@@ -153,7 +153,7 @@ function OfferNotLoggedPage({offersArray} : OfferNoLoggedPageProps): JSX.Element
           <Map environment={ComponentEnvironment.Offer} />
         </section>
         <div className="container">
-          <NearPlaces offersArray={offersArray} />
+          <NearPlaces offers={offers} />
         </div>
       </main>
     </div>

@@ -5,17 +5,17 @@ import { HTMLAttributes } from 'react';
 import formatRating from '../../utils/function';
 
 
-type HTMLProps = Pick<HTMLAttributes<HTMLElement>, 'onMouseEnter'>;
+type HTMLProps = Pick<HTMLAttributes<HTMLElement>, 'onMouseEnter' | 'onMouseLeave'>;
 type OfferProps = PlaceCardProps & HTMLProps;
 
-function PlaceCard({environment, isPremium, link, image, name, price, isFavorite, rating, type, id, onMouseEnter}: OfferProps): JSX.Element {
+function PlaceCard({environment, isPremium, link, image, name, price, isFavorite, rating, type, id, onMouseEnter, onMouseLeave}: OfferProps): JSX.Element {
   const imageSize = {
     width: ((environment === 'cities') || (environment === 'near-places')) ? 260 : 150,
     height: ((environment === 'cities') || (environment === 'near-places')) ? 200 : 110,
   };
 
   return (
-    <article className={`${environment}__card place-card`} onMouseEnter={onMouseEnter}>
+    <article className={`${environment}__card place-card`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>

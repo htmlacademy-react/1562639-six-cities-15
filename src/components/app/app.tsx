@@ -11,10 +11,10 @@ import { PlaceCardProps } from '../../mock/cards-mock';
 
 type AppPageProps = {
   resultCount: number;
-  offersArray: PlaceCardProps[];
+  offers: PlaceCardProps[];
 }
 
-function App({ resultCount, offersArray}: AppPageProps): JSX.Element {
+function App({ resultCount, offers}: AppPageProps): JSX.Element {
   const authorization = AuthorizationStatus.Auth;
 
   return (
@@ -29,14 +29,14 @@ function App({ resultCount, offersArray}: AppPageProps): JSX.Element {
             <Route
               key={city.name}
               path={`/${city.slug}`}
-              element={<MainPage resultCount={resultCount} offersArray={offersArray} authorizationStatus={authorization} />}
+              element={<MainPage resultCount={resultCount} offers={offers} authorizationStatus={authorization} />}
             />
           ))}
           <Route
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <FavoritesPage offersArray={offersArray} authorizationStatus={authorization} />
+                <FavoritesPage offers={offers} authorizationStatus={authorization} />
               </PrivateRoute>
             }
           />
@@ -50,7 +50,7 @@ function App({ resultCount, offersArray}: AppPageProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage offersArray={offersArray} authorizationStatus={authorization} />}
+            element={<OfferPage offers={offers} authorizationStatus={authorization} />}
           />
           <Route
             path="*"
