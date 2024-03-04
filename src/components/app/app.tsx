@@ -7,12 +7,16 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { HelmetProvider } from 'react-helmet-async';
+import { PlaceCardProps } from '../../mock/cards-mock';
 
 type AppPageProps = {
   resultCount: number;
+  offers: PlaceCardProps[];
 }
 
-function App({ resultCount }: AppPageProps): JSX.Element {
+function App({ resultCount, offers}: AppPageProps): JSX.Element {
+  const authorization = AuthorizationStatus.Auth;
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -25,14 +29,14 @@ function App({ resultCount }: AppPageProps): JSX.Element {
             <Route
               key={city.name}
               path={`/${city.slug}`}
-              element={<MainPage resultCount={resultCount} />}
+              element={<MainPage resultCount={resultCount} offers={offers} authorizationStatus={authorization} />}
             />
           ))}
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-                <FavoritesPage />
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                <FavoritesPage offers={offers} authorizationStatus={authorization} />
               </PrivateRoute>
             }
           />
@@ -46,7 +50,7 @@ function App({ resultCount }: AppPageProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage />}
+            element={<OfferPage offers={offers} authorizationStatus={authorization} />}
           />
           <Route
             path="*"

@@ -1,22 +1,27 @@
 import Header from '../../components/header/header';
 import LocationList from '../../components/location-list/location-list';
-import PlaceCard from '../../components/place-card/place-card';
 import Map from '../../components/map/map';
-import { CARDS_MOCK } from '../../constants/cards-mock';
-import { ComponentEnvironment } from '../../constants/const';
+import { AuthorizationStatus, ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
+import { PlaceCardProps } from '../../mock/cards-mock';
+import PlaceCard from '../../components/place-card/place-card';
+import { useState } from 'react';
+
 
 type MainPageProps = {
   resultCount: number;
+  offers: PlaceCardProps[];
+  authorizationStatus: AuthorizationStatus;
 }
 
-function MainPage({resultCount} : MainPageProps): JSX.Element {
+function MainPage({ resultCount, offers, authorizationStatus }: MainPageProps): JSX.Element {
+  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
   return (
     <div className="page page--gray page--main">
       <Helmet>
         <title>Все предложения</title>
       </Helmet>
-      <Header />
+      <Header authorizationStatus={authorizationStatus} />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -24,6 +29,7 @@ function MainPage({resultCount} : MainPageProps): JSX.Element {
             <LocationList />
           </section>
         </div>
+        <p>Active offer {activeOfferId}</p>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -56,11 +62,8 @@ function MainPage({resultCount} : MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {CARDS_MOCK.map((offer) =>
-                  (<PlaceCard environment={ComponentEnvironment.Cities} key={`${offer.id}`} {...offer} />))}
-                {/* Равносильно записи:
-                (<PlaceCard environment='cities' key={`${item.id}`} name={`${item.name}`} type={`${item.type}`} link={`${item.link}`} image={`${item.image}`} price={item.price} rating={`${item.rating}`} isFavorite={item.isFavorite} isPremium={item.isPremium} />))}
-                */}
+                {offers.map((offer) =>
+                  (<PlaceCard environment={ComponentEnvironment.Cities} key={`${offer.id}`} {...offer} onMouseEnter={() => setActiveOfferId(offer.id)} onMouseLeave={() => setActiveOfferId(null)} />))}
               </div>
             </section>
             <div className="cities__right-section">

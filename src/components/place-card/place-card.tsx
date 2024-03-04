@@ -1,14 +1,21 @@
 import classNames from 'classnames';
-import { PlaceCardProps } from '../../constants/cards-mock';
+import { PlaceCardProps } from '../../mock/cards-mock';
+import { Link } from 'react-router-dom';
+import { HTMLAttributes } from 'react';
+import formatRating from '../../utils/function';
 
-function PlaceCard({environment, isPremium, link, image, name, price, isFavorite, rating, type}: PlaceCardProps): JSX.Element {
+
+type HTMLProps = Pick<HTMLAttributes<HTMLElement>, 'onMouseEnter' | 'onMouseLeave'>;
+type OfferProps = PlaceCardProps & HTMLProps;
+
+function PlaceCard({environment, isPremium, link, image, name, price, isFavorite, rating, type, id, onMouseEnter, onMouseLeave}: OfferProps): JSX.Element {
   const imageSize = {
     width: ((environment === 'cities') || (environment === 'near-places')) ? 260 : 150,
     height: ((environment === 'cities') || (environment === 'near-places')) ? 200 : 110,
   };
 
   return (
-    <article className={`${environment}__card place-card`}>
+    <article className={`${environment}__card place-card`} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -49,14 +56,14 @@ function PlaceCard({environment, isPremium, link, image, name, price, isFavorite
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating}%` }} />
+            <span style={{ width: formatRating(rating) }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href={link}>
+          <Link to={`/offer/${id}`}>
             {name}
-          </a>
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

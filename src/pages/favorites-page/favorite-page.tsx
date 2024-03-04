@@ -1,17 +1,22 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import PlaceCard from '../../components/place-card/place-card';
-import { CARDS_MOCK } from '../../constants/cards-mock';
-import { ComponentEnvironment } from '../../constants/const';
+import { PlaceCardProps } from '../../mock/cards-mock';
+import { AuthorizationStatus, ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
 
-function FavoritesPage() : JSX.Element {
+type FavoritesPageProps = {
+  offers: PlaceCardProps[];
+  authorizationStatus: AuthorizationStatus;
+}
+
+function FavoritesPage({offers, authorizationStatus} : FavoritesPageProps) : JSX.Element {
   return (
     <div className="page">
       <Helmet>
         <title>Избранное</title>
       </Helmet>
-      <Header />
+      <Header authorizationStatus={authorizationStatus}/>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
@@ -26,8 +31,8 @@ function FavoritesPage() : JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <PlaceCard environment={ComponentEnvironment.Favorites} {...CARDS_MOCK[1]}/>
-                  <PlaceCard environment={ComponentEnvironment.Favorites} {...CARDS_MOCK[3]}/>
+                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offers[1]}/>
+                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offers[3]}/>
                 </div>
               </li>
               <li className="favorites__locations-items">
@@ -39,7 +44,7 @@ function FavoritesPage() : JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <PlaceCard environment={ComponentEnvironment.Favorites} {...CARDS_MOCK[1]}/>
+                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offers[1]}/>
                 </div>
               </li>
             </ul>

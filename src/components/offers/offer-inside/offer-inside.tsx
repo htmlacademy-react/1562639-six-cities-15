@@ -9,7 +9,7 @@ function OfferInside(): JSX.Element {
     <div className="offer__inside">
       <h2 className="offer__inside-title">What`s inside</h2>
       <ul className="offer__inside-list">
-        {offers.map((offer, i) => <OfferItem offer={offer} key={offer[i]} />)}
+        {offers.map((offer) => <OfferItem offer={offer} key={offer} />)}
       </ul>
     </div>
   );

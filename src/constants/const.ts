@@ -7,8 +7,6 @@ export const ComponentEnvironment = {
   Favorites: 'favorites',
   NearPlaces: 'near-places',
   Offer: 'offer',
-  Header: 'header',
-  Footer: 'footer'
 } as const;
 
 export enum AppRoute {

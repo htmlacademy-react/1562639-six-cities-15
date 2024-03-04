@@ -1,11 +1,16 @@
-import OfferGallery from '../../components/offers/offer-gallery/offer-gallery';
-import OfferInside from '../../components/offers/offer-inside/offer-inside';
-import NearPlaces from '../../components/offers/near-places/near-places';
-import Map from '../../components/map/map';
+import OfferGallery from '../offers/offer-gallery/offer-gallery';
+import OfferInside from '../offers/offer-inside/offer-inside';
+import NearPlaces from '../offers/near-places/near-places';
+import Map from '../map/map';
 import { ComponentEnvironment, AppRoute } from '../../constants/const';
 import { Link } from 'react-router-dom';
+import { PlaceCardProps } from '../../mock/cards-mock';
 
-function OfferNotLoggedPage(): JSX.Element {
+type OfferNoLoggedPageProps = {
+  offers: PlaceCardProps[];
+}
+
+function OfferNotLoggedPage({offers} : OfferNoLoggedPageProps): JSX.Element {
   return (
     <div className="page">
       <header className="header">
@@ -148,7 +153,7 @@ function OfferNotLoggedPage(): JSX.Element {
           <Map environment={ComponentEnvironment.Offer} />
         </section>
         <div className="container">
-          <NearPlaces />
+          <NearPlaces offers={offers} />
         </div>
       </main>
     </div>
