@@ -9,6 +9,7 @@ export type PlaceCardProps = {
   isFavorite: boolean;
   isPremium: boolean;
   id: string;
+  location: {latitude: number; longitude: number};
 }
 
 export const CARDS_MOCK : PlaceCardProps[] = [{
@@ -21,6 +22,7 @@ export const CARDS_MOCK : PlaceCardProps[] = [{
   isFavorite: false,
   isPremium: true,
   id: '1',
+  location: {latitude: 52.3909553943508, longitude: 4.85309666406198}
 },
 {
   name: 'Wood and stone place',
@@ -32,6 +34,7 @@ export const CARDS_MOCK : PlaceCardProps[] = [{
   isFavorite: true,
   isPremium: false,
   id: '2',
+  location: {latitude: 52.3609553943508, longitude: 4.85309666406198}
 },
 {
   name: 'Canal View Prinsengracht',
@@ -43,6 +46,7 @@ export const CARDS_MOCK : PlaceCardProps[] = [{
   isFavorite: false,
   isPremium: false,
   id: '3',
+  location: {latitude: 52.3909553943508, longitude: 4.929309666406198}
 },
 {
   name: 'Nice, cozy, warm big bed apartment',
@@ -54,6 +58,7 @@ export const CARDS_MOCK : PlaceCardProps[] = [{
   isFavorite: true,
   isPremium: true,
   id: '4',
+  location: {latitude: 52.3809553943508, longitude: 4.939309666406198}
 },
 {
   name: 'Wood and stone place',
@@ -65,5 +70,6 @@ export const CARDS_MOCK : PlaceCardProps[] = [{
   isFavorite: true,
   isPremium: false,
   id: '5',
+  location: {latitude: 52.3809553943508, longitude: 4.943309666406198}
 },
 ];
