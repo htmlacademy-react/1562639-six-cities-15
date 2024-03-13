@@ -3,10 +3,11 @@ import OfferGallery from '../../components/offers/offer-gallery/offer-gallery';
 import OfferInside from '../../components/offers/offer-inside/offer-inside';
 import NearPlaces from '../../components/offers/near-places/near-places';
 import Map from '../../components/map/map';
-import { AuthorizationStatus, ComponentEnvironment } from '../../constants/const';
+import { AuthorizationStatus, CITIES, ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
-import { PlaceCardProps } from '../../mock/cards-mock';
+import { PlaceCardProps } from '../../types/types';
+
 
 type OfferPageProps = {
   offers: PlaceCardProps[];
@@ -129,7 +130,7 @@ function OfferPage({offers, authorizationStatus} : OfferPageProps): JSX.Element 
               </section>
             </div>
           </div>
-          <Map environment={ComponentEnvironment.Offer} />
+          <Map environment={ComponentEnvironment.Offer} city={CITIES[1]} offers={offers} />
         </section>
         <div className="container">
           <NearPlaces offers={offers} />

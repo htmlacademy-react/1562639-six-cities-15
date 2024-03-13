@@ -4,7 +4,8 @@ import NearPlaces from '../offers/near-places/near-places';
 import Map from '../map/map';
 import { ComponentEnvironment, AppRoute } from '../../constants/const';
 import { Link } from 'react-router-dom';
-import { PlaceCardProps } from '../../mock/cards-mock';
+import { PlaceCardProps } from '../../types/types';
+
 
 type OfferNoLoggedPageProps = {
   offers: PlaceCardProps[];

@@ -1,9 +1,9 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import PlaceCard from '../../components/place-card/place-card';
-import { PlaceCardProps } from '../../mock/cards-mock';
 import { AuthorizationStatus, ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
+import { PlaceCardProps } from '../../types/types';
 
 type FavoritesPageProps = {
   offers: PlaceCardProps[];
