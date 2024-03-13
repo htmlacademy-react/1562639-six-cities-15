@@ -1,9 +1,9 @@
 import Header from '../../components/header/header';
 import LocationList from '../../components/location-list/location-list';
 import Map from '../../components/map/map';
-import { AuthorizationStatus, ComponentEnvironment } from '../../constants/const';
+import { AuthorizationStatus, CITIES, ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
-import { PlaceCardProps } from '../../mock/cards-mock';
+import { PlaceCardProps } from '../../types/types';
 import PlaceCard from '../../components/place-card/place-card';
 import { useState } from 'react';
 
@@ -29,7 +29,6 @@ function MainPage({ resultCount, offers, authorizationStatus }: MainPageProps): 
             <LocationList />
           </section>
         </div>
-        <p>Active offer {activeOfferId}</p>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -67,7 +66,7 @@ function MainPage({ resultCount, offers, authorizationStatus }: MainPageProps): 
               </div>
             </section>
             <div className="cities__right-section">
-              <Map environment={ComponentEnvironment.Cities} />
+              <Map environment={ComponentEnvironment.Cities} city={CITIES[1]} offers={offers} activeOfferId={activeOfferId} />
             </div>
           </div>
         </div>

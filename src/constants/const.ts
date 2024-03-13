@@ -32,3 +32,7 @@ export const CITIES = [
 ] as const;
 
 export type CityName = typeof CITIES[number]['name'];
+
+export const URL_MARKER_DEFAULT = '../../../public/img/pin.svg';
+
+export const URL_MARKER_CURRENT = '../../../public/img/pin-active.svg';
