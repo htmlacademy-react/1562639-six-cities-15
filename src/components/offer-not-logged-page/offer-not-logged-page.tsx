@@ -1,8 +1,12 @@
 import OfferGallery from '../offers/offer-gallery/offer-gallery';
 import OfferInside from '../offers/offer-inside/offer-inside';
 import NearPlaces from '../offers/near-places/near-places';
-import Map from '../map/map';
-import { ComponentEnvironment, AppRoute, CITIES } from '../../constants/const';
+// import Map from '../map/map';
+import {
+  // ComponentEnvironment,
+  AppRoute,
+  // CITIES
+} from '../../constants/const';
 import { Link } from 'react-router-dom';
 import { PlaceCardProps } from '../../types/types';
 
@@ -151,7 +155,7 @@ function OfferNotLoggedPage({offers} : OfferNoLoggedPageProps): JSX.Element {
               </section>
             </div>
           </div>
-          <Map environment={ComponentEnvironment.Offer} city={CITIES[1]} offers={offers} />
+          {/* <Map environment={ComponentEnvironment.Offer} city={CITIES[1]} offers={offers} /> */}
         </section>
         <div className="container">
           <NearPlaces offers={offers} />
