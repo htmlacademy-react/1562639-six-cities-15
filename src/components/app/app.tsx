@@ -9,13 +9,11 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { HelmetProvider } from 'react-helmet-async';
 import { PlaceCardProps } from '../../types/types';
 
-
 type AppPageProps = {
-  resultCount: number;
   offers: PlaceCardProps[];
-}
+};
 
-function App({ resultCount, offers}: AppPageProps): JSX.Element {
+function App({ offers }: AppPageProps): JSX.Element {
   const authorization = AuthorizationStatus.Auth;
 
   return (
@@ -30,14 +28,23 @@ function App({ resultCount, offers}: AppPageProps): JSX.Element {
             <Route
               key={city.name}
               path={`/${city.slug}`}
-              element={<MainPage resultCount={resultCount} offers={offers} authorizationStatus={authorization} />}
+              element={
+                <MainPage
+                  offers={offers}
+                  authorizationStatus={authorization}
+                  city={city.name}
+                />
+              }
             />
           ))}
           <Route
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <FavoritesPage offers={offers} authorizationStatus={authorization} />
+                <FavoritesPage
+                  offers={offers}
+                  authorizationStatus={authorization}
+                />
               </PrivateRoute>
             }
           />
@@ -51,16 +58,14 @@ function App({ resultCount, offers}: AppPageProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage offers={offers} authorizationStatus={authorization} />}
+            element={
+              <OfferPage offers={offers} authorizationStatus={authorization} />
+            }
           />
-          <Route
-            path="*"
-            element={<NotFoundPage />}
-          />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
-
   );
 }
 

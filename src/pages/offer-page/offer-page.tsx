@@ -2,24 +2,30 @@ import Header from '../../components/header/header';
 import OfferGallery from '../../components/offers/offer-gallery/offer-gallery';
 import OfferInside from '../../components/offers/offer-inside/offer-inside';
 import NearPlaces from '../../components/offers/near-places/near-places';
-import Map from '../../components/map/map';
-import { AuthorizationStatus, CITIES, ComponentEnvironment } from '../../constants/const';
+// import Map from '../../components/map/map';
+import { AuthorizationStatus,
+  // CityName,
+  // ComponentEnvironment
+} from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
 import { PlaceCardProps } from '../../types/types';
 
-
 type OfferPageProps = {
   offers: PlaceCardProps[];
   authorizationStatus: AuthorizationStatus;
-}
+  // city: CityName;
+};
 
-
-function OfferPage({offers, authorizationStatus} : OfferPageProps): JSX.Element {
+function OfferPage({
+  offers,
+  authorizationStatus,
+  // city,
+}: OfferPageProps): JSX.Element {
   return (
     <div className="page">
       <Helmet>
-        <title>Подробнее о выбранном месте</title>
+        <title>6 Cities - offer</title>
       </Helmet>
       <Header authorizationStatus={authorizationStatus} />
       <main className="page__main page__main--offer">
@@ -49,7 +55,9 @@ function OfferPage({offers, authorizationStatus} : OfferPageProps): JSX.Element 
                 <span className="offer__rating-value rating__value">4.8</span>
               </div>
               <ul className="offer__features">
-                <li className="offer__feature offer__feature--entire">Apartment</li>
+                <li className="offer__feature offer__feature--entire">
+                  Apartment
+                </li>
                 <li className="offer__feature offer__feature--bedrooms">
                   3 Bedrooms
                 </li>
@@ -79,9 +87,9 @@ function OfferPage({offers, authorizationStatus} : OfferPageProps): JSX.Element 
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">
-                    A quiet cozy and picturesque that hides behind a a river by the
-                    unique lightness of Amsterdam. The building is green and from
-                    18th century.
+                    A quiet cozy and picturesque that hides behind a a river by
+                    the unique lightness of Amsterdam. The building is green and
+                    from 18th century.
                   </p>
                   <p className="offer__text">
                     An independent House, strategically located between Rembrand
@@ -116,9 +124,9 @@ function OfferPage({offers, authorizationStatus} : OfferPageProps): JSX.Element 
                         </div>
                       </div>
                       <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by
-                        the unique lightness of Amsterdam. The building is green and
-                        from 18th century.
+                        A quiet cozy and picturesque that hides behind a a river
+                        by the unique lightness of Amsterdam. The building is
+                        green and from 18th century.
                       </p>
                       <time className="reviews__time" dateTime="2019-04-24">
                         April 2019
@@ -130,14 +138,17 @@ function OfferPage({offers, authorizationStatus} : OfferPageProps): JSX.Element 
               </section>
             </div>
           </div>
-          <Map environment={ComponentEnvironment.Offer} city={CITIES[1]} offers={offers} />
+          {/* <Map
+            environment={ComponentEnvironment.Offer}
+            offers={offers}
+            city={city}
+          /> */}
         </section>
         <div className="container">
           <NearPlaces offers={offers} />
         </div>
       </main>
     </div>
-
   );
 }
 

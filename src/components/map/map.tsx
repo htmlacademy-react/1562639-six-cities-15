@@ -2,15 +2,15 @@ import leaflet, { LayerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useRef } from 'react';
 import useMap from '../../hooks/useMap';
-import { Cities, PlaceCardProps } from '../../types/types';
-// import { CITIES } from '../../constants/const';
+import { PlaceCardProps } from '../../types/types';
+import { CityName, CITIES } from '../../constants/const';
 
-type MapEnvironment = {
+type MapProps = {
   environment: string;
-  city: Cities;
+  city: CityName;
   activeOfferId?: string | null;
   offers: PlaceCardProps[];
-}
+};
 
 const defaultCustomIcon = leaflet.icon({
   iconUrl: 'img/pin.svg',
@@ -24,49 +24,52 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [13.5, 39],
 });
 
-function Map({ environment, city, offers, activeOfferId }: MapEnvironment): JSX.Element {
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  // const location = useMemo(() => CITIES.find(({name}) => name === city.name) ?.location, [city]);
-  const map = useMap({mapRef: mapContainerRef, location: city.location});
+function Map({
+  environment,
+  city,
+  offers,
+  activeOfferId,
+}: MapProps): JSX.Element {
+  const mapRef = useRef<HTMLDivElement>(null);
+  const location = CITIES.find(({ name }) => name === city)!.location;
+  const map = useMap({ mapRef, location});
   const markerLayer = useRef<LayerGroup>(leaflet.layerGroup());
 
   useEffect(() => {
     if (map) {
-      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+      map.setView([location.latitude, location.longitude], location.zoom);
       markerLayer.current.addTo(map);
-      markerLayer.current.clearLayers();
+      // markerLayer.current.clearLayers();
     }
-  }, [city, map]);
+  }, [location.latitude, location.longitude, location.zoom, map]);
 
-  useEffect(() : void => {
+  useEffect(() => {
     if (map) {
       offers.forEach((offer) => {
         leaflet
-          .marker({
-            lat: offer.location.latitude,
-            lng: offer.location.longitude,
-          }, {
-            icon:
-              activeOfferId && offer.id === activeOfferId
-                ? currentCustomIcon
-                : defaultCustomIcon,
-          })
+          .marker(
+            {
+              lat: offer.location.latitude,
+              lng: offer.location.longitude,
+            },
+            {
+              icon:
+                activeOfferId && offer.id === activeOfferId
+                  ? currentCustomIcon
+                  : defaultCustomIcon,
+            }
+          )
           .addTo(markerLayer.current);
       });
+      const layer = markerLayer.current;
+      return () => {
+        layer.clearLayers();
+      };
     }
   }, [activeOfferId, map, offers]);
 
-  // useEffect(() => {
-  //   if (map && location) {
-  //     map.panTo([location.latitude, location.longitude]);
-  //   }
-  // }, [location, map]);
-
   return (
-    <section
-      className={`${environment}__map map`}
-      ref={mapContainerRef}
-    />
+    <section className={`${environment}__map map`} ref={mapRef} />
   );
 }
 

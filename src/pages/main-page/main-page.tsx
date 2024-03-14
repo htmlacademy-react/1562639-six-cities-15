@@ -1,25 +1,31 @@
 import Header from '../../components/header/header';
 import LocationList from '../../components/location-list/location-list';
 import Map from '../../components/map/map';
-import { AuthorizationStatus, CITIES, ComponentEnvironment } from '../../constants/const';
+import { AuthorizationStatus, CityName, ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
 import { PlaceCardProps } from '../../types/types';
 import PlaceCard from '../../components/place-card/place-card';
 import { useState } from 'react';
 
-
 type MainPageProps = {
-  resultCount: number;
   offers: PlaceCardProps[];
   authorizationStatus: AuthorizationStatus;
-}
+  city: CityName;
+};
 
-function MainPage({ resultCount, offers, authorizationStatus }: MainPageProps): JSX.Element {
+function MainPage({
+  offers,
+  authorizationStatus,
+  city
+}: MainPageProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+
+  const currentOffers = offers.filter((offer) => offer.city.name === city);
+
   return (
     <div className="page page--gray page--main">
       <Helmet>
-        <title>Все предложения</title>
+        <title>6 Cities</title>
       </Helmet>
       <Header authorizationStatus={authorizationStatus} />
       <main className="page__main page__main--index">
@@ -33,7 +39,9 @@ function MainPage({ resultCount, offers, authorizationStatus }: MainPageProps): 
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{resultCount} places to stay in Amsterdam</b>
+              <b className="places__found">
+                {currentOffers.length} places to stay in {city}
+              </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -61,18 +69,29 @@ function MainPage({ resultCount, offers, authorizationStatus }: MainPageProps): 
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) =>
-                  (<PlaceCard environment={ComponentEnvironment.Cities} key={`${offer.id}`} {...offer} onMouseEnter={() => setActiveOfferId(offer.id)} onMouseLeave={() => setActiveOfferId(null)} />))}
+                {currentOffers.map((offer) => (
+                  <PlaceCard
+                    environment={ComponentEnvironment.Cities}
+                    key={`${offer.id}`}
+                    {...offer}
+                    onMouseEnter={() => setActiveOfferId(offer.id)}
+                    onMouseLeave={() => setActiveOfferId(null)}
+                  />
+                ))}
               </div>
             </section>
             <div className="cities__right-section">
-              <Map environment={ComponentEnvironment.Cities} city={CITIES[1]} offers={offers} activeOfferId={activeOfferId} />
+              <Map
+                environment={ComponentEnvironment.Cities}
+                city={city}
+                offers={currentOffers}
+                activeOfferId={activeOfferId}
+              />
             </div>
           </div>
         </div>
       </main>
     </div>
-
   );
 }
 

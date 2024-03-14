@@ -9,26 +9,30 @@ export type PlaceCardProps = {
   isFavorite: boolean;
   isPremium: boolean;
   id: string;
-  city: {
-    name: string;
-    location: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
-    };
-  };
+  city: City;
   location: {
     latitude: number;
     longitude: number;
   };
 };
 
-export type Cities = {
+type City = {
   name: string;
-  location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-  };
-  slug: string;
-};
+  location: Location;
+}
+
+export type Location = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+}
+
+// export type CityList = {
+//   name: string;
+//   location: {
+//     latitude: number;
+//     longitude: number;
+//     zoom: number;
+//   };
+//   slug: string;
+// };
