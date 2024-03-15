@@ -1,22 +1,25 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import PlaceCard from '../../components/place-card/place-card';
-import { PlaceCardProps } from '../../mock/cards-mock';
 import { AuthorizationStatus, ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
+import { PlaceCardProps } from '../../types/types';
 
 type FavoritesPageProps = {
   offers: PlaceCardProps[];
   authorizationStatus: AuthorizationStatus;
-}
+};
 
-function FavoritesPage({offers, authorizationStatus} : FavoritesPageProps) : JSX.Element {
+function FavoritesPage({
+  offers,
+  authorizationStatus,
+}: FavoritesPageProps): JSX.Element {
   return (
     <div className="page">
       <Helmet>
-        <title>Избранное</title>
+        <title>6 Cities - favorites</title>
       </Helmet>
-      <Header authorizationStatus={authorizationStatus}/>
+      <Header authorizationStatus={authorizationStatus} />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
@@ -31,8 +34,14 @@ function FavoritesPage({offers, authorizationStatus} : FavoritesPageProps) : JSX
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offers[1]}/>
-                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offers[3]}/>
+                  <PlaceCard
+                    environment={ComponentEnvironment.Favorites}
+                    {...offers[1]}
+                  />
+                  <PlaceCard
+                    environment={ComponentEnvironment.Favorites}
+                    {...offers[3]}
+                  />
                 </div>
               </li>
               <li className="favorites__locations-items">
@@ -44,7 +53,10 @@ function FavoritesPage({offers, authorizationStatus} : FavoritesPageProps) : JSX
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offers[1]}/>
+                  <PlaceCard
+                    environment={ComponentEnvironment.Favorites}
+                    {...offers[1]}
+                  />
                 </div>
               </li>
             </ul>
@@ -53,7 +65,6 @@ function FavoritesPage({offers, authorizationStatus} : FavoritesPageProps) : JSX
       </main>
       <Footer />
     </div>
-
   );
 }
 

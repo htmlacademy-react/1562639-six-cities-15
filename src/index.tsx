@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { Setting } from './constants/const';
 import { CARDS_MOCK } from './mock/cards-mock';
 
 const root = ReactDOM.createRoot(
@@ -11,7 +10,6 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
-      resultCount={Setting.ResultCount}
       offers={CARDS_MOCK}
     />
   </React.StrictMode>

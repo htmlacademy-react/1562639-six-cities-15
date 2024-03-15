@@ -1,10 +1,75 @@
-type MapEnvironment = {
-  environment: string;
-}
+import leaflet, { LayerGroup } from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import { useEffect, useRef } from 'react';
+import useMap from '../../hooks/useMap';
+import { PlaceCardProps } from '../../types/types';
+import { CityName, CITIES } from '../../constants/const';
 
-function Map({environment} : MapEnvironment) : JSX.Element {
+type MapProps = {
+  environment: string;
+  city: CityName;
+  activeOfferId?: string | null;
+  offers: PlaceCardProps[];
+};
+
+const defaultCustomIcon = leaflet.icon({
+  iconUrl: 'img/pin.svg',
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39],
+});
+
+const currentCustomIcon = leaflet.icon({
+  iconUrl: 'img/pin-active.svg',
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39],
+});
+
+function Map({
+  environment,
+  city,
+  offers,
+  activeOfferId,
+}: MapProps): JSX.Element {
+  const mapRef = useRef<HTMLDivElement>(null);
+  const location = CITIES.find(({ name }) => name === city)!.location;
+  const map = useMap({ mapRef, location});
+  const markerLayer = useRef<LayerGroup>(leaflet.layerGroup());
+
+  useEffect(() => {
+    if (map) {
+      map.setView([location.latitude, location.longitude], location.zoom);
+      markerLayer.current.addTo(map);
+      // markerLayer.current.clearLayers();
+    }
+  }, [location.latitude, location.longitude, location.zoom, map]);
+
+  useEffect(() => {
+    if (map) {
+      offers.forEach((offer) => {
+        leaflet
+          .marker(
+            {
+              lat: offer.location.latitude,
+              lng: offer.location.longitude,
+            },
+            {
+              icon:
+                activeOfferId && offer.id === activeOfferId
+                  ? currentCustomIcon
+                  : defaultCustomIcon,
+            }
+          )
+          .addTo(markerLayer.current);
+      });
+      const layer = markerLayer.current;
+      return () => {
+        layer.clearLayers();
+      };
+    }
+  }, [activeOfferId, map, offers]);
+
   return (
-    <section className={`${environment}__map map`} />
+    <section className={`${environment}__map map`} ref={mapRef} />
   );
 }
 

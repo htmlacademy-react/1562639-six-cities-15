@@ -1,6 +1,6 @@
 import PlaceCard from '../../place-card/place-card';
-import { PlaceCardProps } from '../../../mock/cards-mock';
 import { ComponentEnvironment } from '../../../constants/const';
+import { PlaceCardProps } from '../../../types/types';
 
 type NearPlacesProps = {
   offers: PlaceCardProps[];

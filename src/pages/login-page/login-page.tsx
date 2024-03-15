@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
 
-function LoginPage() : JSX.Element {
+function LoginPage(): JSX.Element {
   return (
     <div className="page page--gray page--login">
       <Helmet>
-        <title>Пройдите авторизацию</title>
+        <title>6 Cities - Login</title>
       </Helmet>
       <header className="header">
         <div className="container">
@@ -50,7 +50,10 @@ function LoginPage() : JSX.Element {
                   required
                 />
               </div>
-              <button className="login__submit form__submit button" type="submit">
+              <button
+                className="login__submit form__submit button"
+                type="submit"
+              >
                 Sign in
               </button>
             </form>

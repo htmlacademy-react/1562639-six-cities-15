@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { PlaceCardProps } from '../../mock/cards-mock';
 import { Link } from 'react-router-dom';
 import { HTMLAttributes } from 'react';
 import formatRating from '../../utils/function';
+import { PlaceCardProps } from '../../types/types';
 
 
 type HTMLProps = Pick<HTMLAttributes<HTMLElement>, 'onMouseEnter' | 'onMouseLeave'>;
