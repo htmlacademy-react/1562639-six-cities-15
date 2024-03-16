@@ -1,6 +1,6 @@
-import { PlaceCardProps } from '../types/types';
+import { Offers } from '../types/offer';
 
-export const CARDS_MOCK : PlaceCardProps[] = [{
+export const CARDS_MOCK : Offers[] = [{
   name: 'Beautiful &amp; luxurious apartment at great location',
   type: 'Apartment',
   link: '#',

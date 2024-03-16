@@ -8,7 +8,7 @@ const OfferGalleryItem = ({ offerImage }: { offerImage: string }) => (
   </div>
 );
 
-const offerImages : string[] = ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/apartment-01.jpg'];
+const offerImages : string[] = ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/apartment-01.jpg', 'img/apartment-01.jpg', 'img/apartment-01.jpg'];
 
 function OfferGallery(): JSX.Element {
   return (

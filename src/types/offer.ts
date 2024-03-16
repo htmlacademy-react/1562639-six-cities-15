@@ -1,4 +1,6 @@
-export type PlaceCardProps = {
+import { CityName } from '../constants/const';
+
+export type Offers = {
   environment?: string;
   name: string;
   type: string;
@@ -17,7 +19,7 @@ export type PlaceCardProps = {
 };
 
 type City = {
-  name: string;
+  name: CityName;
   location: Location;
 }
 
@@ -26,13 +28,3 @@ export type Location = {
   longitude: number;
   zoom: number;
 }
-
-// export type CityList = {
-//   name: string;
-//   location: {
-//     latitude: number;
-//     longitude: number;
-//     zoom: number;
-//   };
-//   slug: string;
-// };

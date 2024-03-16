@@ -3,12 +3,12 @@ import LocationList from '../../components/location-list/location-list';
 import Map from '../../components/map/map';
 import { AuthorizationStatus, CityName, ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
-import { PlaceCardProps } from '../../types/types';
+import { Offers } from '../../types/offer';
 import PlaceCard from '../../components/place-card/place-card';
 import { useState } from 'react';
 
 type MainPageProps = {
-  offers: PlaceCardProps[];
+  offers: Offers[];
   authorizationStatus: AuthorizationStatus;
   city: CityName;
 };

@@ -8,11 +8,11 @@ import {
   // CITIES
 } from '../../constants/const';
 import { Link } from 'react-router-dom';
-import { PlaceCardProps } from '../../types/types';
+import { Offers } from '../../types/offer';
 
 
 type OfferNoLoggedPageProps = {
-  offers: PlaceCardProps[];
+  offers: Offers[];
 }
 
 function OfferNotLoggedPage({offers} : OfferNoLoggedPageProps): JSX.Element {

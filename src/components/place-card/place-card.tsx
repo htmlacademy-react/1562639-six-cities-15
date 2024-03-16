@@ -2,11 +2,11 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { HTMLAttributes } from 'react';
 import formatRating from '../../utils/function';
-import { PlaceCardProps } from '../../types/types';
+import { Offers } from '../../types/offer';
 
 
 type HTMLProps = Pick<HTMLAttributes<HTMLElement>, 'onMouseEnter' | 'onMouseLeave'>;
-type OfferProps = PlaceCardProps & HTMLProps;
+type OfferProps = Offers & HTMLProps;
 
 function PlaceCard({environment, isPremium, link, image, name, price, isFavorite, rating, type, id, onMouseEnter, onMouseLeave}: OfferProps): JSX.Element {
   const imageSize = {
