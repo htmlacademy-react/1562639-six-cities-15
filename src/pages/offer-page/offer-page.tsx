@@ -14,6 +14,7 @@ import ReviewsList from '../../components/reviews/reviews-list/reviews-list';
 import { useParams } from 'react-router-dom';
 import NotFoundPage from '../not-found-page/not-found-page';
 import { getNearOffers } from './utils';
+import { REVIEWS } from '../../mock/reviews';
 
 type OfferPageProps = {
   offers: Offers[];
@@ -24,10 +25,8 @@ function OfferPage({
   offers,
   authorizationStatus,
 }: OfferPageProps): JSX.Element {
-  const {offerId} = useParams();
-  console.log(offerId);
-  const foundOffer = offers.find((item) : boolean => item.id === offerId);
-  console.log(foundOffer);
+  const {id} = useParams();
+  const foundOffer = offers.find((item) : boolean => item.id === id);
 
   if (!foundOffer) {
     return <NotFoundPage />;
@@ -35,6 +34,7 @@ function OfferPage({
 
   const offerPage = {...offers, ...foundOffer};
   const nearOffers = getNearOffers(offerPage);
+  const nearOffersPlusCurrent = [offerPage, ...nearOffers];
 
   return (
     <div className="page">
@@ -114,22 +114,22 @@ function OfferPage({
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">
-                  Reviews · <span className="reviews__amount">1</span>
+                  Reviews · <span className="reviews__amount">{REVIEWS.length}</span>
                 </h2>
-                <ReviewsList />
+                <ReviewsList reviews={REVIEWS} />
                 <ReviewsForm />
               </section>
             </div>
           </div>
           <Map
             environment={ComponentEnvironment.Offer}
-            offers={nearOffers}
+            offers={nearOffersPlusCurrent}
             city={foundOffer.city.name}
             activeOfferId={foundOffer.id}
           />
         </section>
         <div className="container">
-          <NearPlaces offers={offers} />
+          <NearPlaces offers={nearOffers} />
         </div>
       </main>
     </div>

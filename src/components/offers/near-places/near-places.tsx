@@ -1,5 +1,5 @@
 import PlaceCard from '../../place-card/place-card';
-import { ComponentEnvironment } from '../../../constants/const';
+import { ComponentEnvironment, NEAR_PLACES_LIMIT } from '../../../constants/const';
 import { Offers } from '../../../types/offer';
 
 type NearPlacesProps = {
@@ -13,7 +13,7 @@ function NearPlaces({offers} : NearPlacesProps): JSX.Element {
         Other places in the neighbourhood
       </h2>
       <div className="near-places__list places__list">
-        {offers.slice(0,3).map((offer) =>
+        {offers.slice(0,NEAR_PLACES_LIMIT).map((offer) =>
           (<PlaceCard environment={ComponentEnvironment.Cities} key={`${offer.id}`} {...offer} />))}
       </div>
     </section>

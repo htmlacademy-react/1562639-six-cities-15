@@ -9,5 +9,5 @@ export type Review = {
   date: string;
   user: User;
   comment: string;
-  rating: boolean;
+  rating: number;
 }

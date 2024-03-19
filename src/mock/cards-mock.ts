@@ -1,185 +1,694 @@
 import { Offers } from '../types/offer';
 
-export const CARDS_MOCK : Offers[] = [{
-  name: 'Beautiful &amp; luxurious apartment at great location',
-  type: 'Apartment',
-  link: '#',
-  image: 'img/apartment-01.jpg',
-  price: 120,
-  rating: 4,
-  isFavorite: false,
-  isPremium: true,
-  id: '1',
-  city: {
-    name: 'Amsterdam',
+export const CARDS_MOCK: Offers[] = [
+  {
+    id: 'a6482170-b154-4a65-b7f8-bdc10c9a2240',
+    title: 'Nice, cozy, warm big bed apartment',
+    type: 'house',
+    price: 139,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13,
+      },
+    },
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 8
-    }
+      latitude: 48.868610000000004,
+      longitude: 2.342499,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 1.9,
   },
-  location: {
-    latitude: 52.3909553943508,
-    longitude: 4.85309666406198}
-},
-{
-  name: 'Wood and stone place',
-  type: 'Room',
-  link: '#',
-  image: 'img/room.jpg',
-  price: 80,
-  rating: 1,
-  isFavorite: true,
-  isPremium: false,
-  id: '2',
-  city: {
-    name: 'Amsterdam',
+  {
+    id: '4d038bc6-544d-4f6a-8b84-ccf9b0e17984',
+    title: 'Perfectly located Castro',
+    type: 'apartment',
+    price: 350,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/1.jpg',
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13,
+      },
+    },
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 8
-    }
+      latitude: 48.858610000000006,
+      longitude: 2.330499,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 2.6,
   },
-  location: {
-    latitude: 52.3609553943508,
-    longitude: 4.85309666406198}
-},
-{
-  name: 'Canal View Prinsengracht',
-  type: 'Apartment',
-  link: '#',
-  image: 'img/apartment-02.jpg',
-  price: 132,
-  rating: 3,
-  isFavorite: false,
-  isPremium: false,
-  id: '3',
-  city: {
-    name: 'Amsterdam',
+  {
+    id: '6cd40154-8663-4951-bd7f-539edc1a5c05',
+    title: 'Waterfront with extraordinary view',
+    type: 'apartment',
+    price: 217,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/12.jpg',
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13,
+      },
+    },
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 8
-    }
+      latitude: 48.834610000000005,
+      longitude: 2.335499,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 4.2,
   },
-  location: {
-    latitude: 52.3909553943508,
-    longitude: 4.929309666406198
-  }
-},
-{
-  name: 'Nice, cozy, warm big bed apartment',
-  type: 'Apartment',
-  link: '#',
-  image: 'img/apartment-03.jpg',
-  price: 180,
-  rating: 5,
-  isFavorite: true,
-  isPremium: true,
-  id: '4',
-  city: {
-    name: 'Amsterdam',
+  {
+    id: 'd995f437-9aca-498f-bf66-603fd919d005',
+    title: 'Beautiful & luxurious apartment at great location',
+    type: 'hotel',
+    price: 329,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/19.jpg',
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13,
+      },
+    },
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 8
-    }
+      latitude: 48.85761,
+      longitude: 2.358499,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 1,
   },
-  location: {
-    latitude: 52.3809553943508,
-    longitude: 4.939309666406198
-  }
-},
-{
-  name: 'Wood and stone place',
-  type: 'Room',
-  link: '#',
-  image: 'img/room.jpg',
-  price: 80,
-  rating: 4,
-  isFavorite: true,
-  isPremium: false,
-  id: '5',
-  city: {
-    name: 'Amsterdam',
+  {
+    id: '5f1c90a3-4ad2-4f98-a47a-afdfcdffbc63',
+    title: 'Nice, cozy, warm big bed apartment',
+    type: 'apartment',
+    price: 216,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/9.jpg',
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13,
+      },
+    },
     location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 8
-    }
+      latitude: 48.834610000000005,
+      longitude: 2.364499,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 3.7,
   },
-  location: {
-    latitude: 52.3809553943508,
-    longitude: 4.943309666406198
-  }
-},
-{
-  name: 'Wood and stone place',
-  type: 'Room',
-  link: '#',
-  image: 'img/room.jpg',
-  price: 80,
-  rating: 4,
-  isFavorite: true,
-  isPremium: false,
-  id: '6',
-  city: {
-    name: 'Paris',
+  {
+    id: '2c9a23c3-8eef-4fe5-84fc-0dab85512cfe',
+    title: 'The Pondhouse - A Magical Place',
+    type: 'hotel',
+    price: 130,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/6.jpg',
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 50.938361,
+        longitude: 6.959974,
+        zoom: 13,
+      },
+    },
     location: {
-      latitude: 48.85661,
-      longitude: 2.351499,
-      zoom: 8
-    }
+      latitude: 50.950361,
+      longitude: 6.961974,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 1.2,
   },
-  location: {
-    latitude: 48.868610000000004,
-    longitude: 2.342499,
-  }
-},
-{
-  name: 'Wood and stone place',
-  type: 'Room',
-  link: '#',
-  image: 'img/room.jpg',
-  price: 80,
-  rating: 4,
-  isFavorite: true,
-  isPremium: false,
-  id: '7',
-  city: {
-    name: 'Brussels',
+  {
+    id: 'e6ed52cf-eb63-41e3-a696-b34fdc62e83d',
+    title: 'Nice, cozy, warm big bed apartment',
+    type: 'house',
+    price: 249,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/8.jpg',
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 50.938361,
+        longitude: 6.959974,
+        zoom: 13,
+      },
+    },
     location: {
-      latitude: 50.846557,
-      longitude: 4.351697,
-      zoom: 13
-    }
+      latitude: 50.932361,
+      longitude: 6.937974,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 3.9,
   },
-  location: {
-    latitude: 50.833557,
-    longitude: 4.374696999999999,
-  }
-},
-{
-  name: 'Wood and stone place',
-  type: 'Room',
-  link: '#',
-  image: 'img/room.jpg',
-  price: 80,
-  rating: 4,
-  isFavorite: true,
-  isPremium: false,
-  id: '8',
-  city: {
-    name: 'Cologne',
+  {
+    id: 'c401632e-62e1-47bd-a9fa-f14068fbcecc',
+    title: 'Perfectly located Castro',
+    type: 'apartment',
+    price: 481,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 50.938361,
+        longitude: 6.959974,
+        zoom: 13,
+      },
+    },
     location: {
-      latitude: 50.938361,
-      longitude: 6.959974,
-      zoom: 13
-    }
+      latitude: 50.934361,
+      longitude: 6.943974,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 3.8,
   },
-  location: {
-    latitude: 50.918461,
-    longitude: 6.969974,
-  }
-},
+  {
+    id: '0bdb53a2-e354-4249-b01a-f04b06138ffc',
+    title: 'Tile House',
+    type: 'hotel',
+    price: 186,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 50.938361,
+        longitude: 6.959974,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 50.947361,
+      longitude: 6.9799739999999995,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 4.4,
+  },
+  {
+    id: 'cfae3c90-be4b-486c-b99c-7b6e658e0b25',
+    title: 'The Pondhouse - A Magical Place',
+    type: 'hotel',
+    price: 482,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/2.jpg',
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 50.938361,
+        longitude: 6.959974,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 50.960361,
+      longitude: 6.967974,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 3.5,
+  },
+  {
+    id: 'b682e436-7f69-4930-bb00-535e66e74490',
+    title: 'Amazing and Extremely Central Flat',
+    type: 'apartment',
+    price: 140,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/20.jpg',
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 50.846557,
+        longitude: 4.351697,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 50.854557,
+      longitude: 4.364697,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 2.2,
+  },
+  {
+    id: '34cc3f9d-27c1-4c48-b899-c6de826814e2',
+    title: 'Canal View Prinsengracht',
+    type: 'room',
+    price: 187,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/20.jpg',
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 50.846557,
+        longitude: 4.351697,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 50.867557,
+      longitude: 4.371696999999999,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 3.6,
+  },
+  {
+    id: 'e9f29111-1643-4473-ad53-fe0b54d48e63',
+    title: 'The house among olive ',
+    type: 'hotel',
+    price: 282,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 50.846557,
+        longitude: 4.351697,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 50.827557,
+      longitude: 4.336697,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 4.5,
+  },
+  {
+    id: 'a54606e3-dfe3-4927-b3c5-7673e80f27d3',
+    title: 'Nice, cozy, warm big bed apartment',
+    type: 'room',
+    price: 128,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/20.jpg',
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 50.846557,
+        longitude: 4.351697,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 50.833557,
+      longitude: 4.374696999999999,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 4,
+  },
+  {
+    id: '6da0a56d-3b5c-4365-894e-473016c51c2c',
+    title: 'Nice, cozy, warm big bed apartment',
+    type: 'room',
+    price: 216,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 50.846557,
+        longitude: 4.351697,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 50.837557,
+      longitude: 4.339697,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 3.9,
+  },
+  {
+    id: '4ea4365c-8c3a-454e-b0ec-7807954c0a1f',
+    title: 'Tile House',
+    type: 'hotel',
+    price: 256,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/3.jpg',
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 52.385540000000006,
+      longitude: 4.902976,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 1.3,
+  },
+  {
+    id: '42d0e15e-a0f3-43d3-a6c1-7f62c18315a8',
+    title: 'Tile House',
+    type: 'apartment',
+    price: 401,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/15.jpg',
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 52.397540000000006,
+      longitude: 4.9099759999999995,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 2.3,
+  },
+  {
+    id: 'da1adb00-ff0e-4c80-9083-f9f263ddb264',
+    title: 'Canal View Prinsengracht',
+    type: 'hotel',
+    price: 411,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/5.jpg',
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 52.37454,
+      longitude: 4.881976,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 4,
+  },
+  {
+    id: '04b0ed1e-d643-469e-bea4-fe423d988fea',
+    title: 'Nice, cozy, warm big bed apartment',
+    type: 'room',
+    price: 293,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/11.jpg',
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 52.367540000000005,
+      longitude: 4.883976,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 4.2,
+  },
+  {
+    id: '5bc748d2-dba7-4cad-af04-e653ad313d27',
+    title: 'Perfectly located Castro',
+    type: 'apartment',
+    price: 332,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/11.jpg',
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 52.361540000000005,
+      longitude: 4.883976,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 1.7,
+  },
+  {
+    id: '4ab381a9-9ffe-4547-8cb5-206cd9c54074',
+    title: 'Amazing and Extremely Central Flat',
+    type: 'house',
+    price: 434,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/14.jpg',
+    city: {
+      name: 'Hamburg',
+      location: {
+        latitude: 53.550341,
+        longitude: 10.000654,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 53.528341000000005,
+      longitude: 10.018654000000002,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 3.3,
+  },
+  {
+    id: '26993d4b-1a42-4b12-b0a3-655a3f1723ad',
+    title: 'Nice, cozy, warm big bed apartment',
+    type: 'house',
+    price: 834,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/15.jpg',
+    city: {
+      name: 'Hamburg',
+      location: {
+        latitude: 53.550341,
+        longitude: 10.000654,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 53.538341,
+      longitude: 9.976654000000002,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 2.1,
+  },
+  {
+    id: '9d2e864b-1074-4be4-a747-e2c31bf130d0',
+    title: 'The Joshua Tree House',
+    type: 'apartment',
+    price: 460,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
+    city: {
+      name: 'Hamburg',
+      location: {
+        latitude: 53.550341,
+        longitude: 10.000654,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 53.563341,
+      longitude: 10.019654000000001,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 2.5,
+  },
+  {
+    id: '331cb16b-605c-4025-a926-c14de26f7431',
+    title: 'Loft Studio in the Central Area',
+    type: 'apartment',
+    price: 147,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/17.jpg',
+    city: {
+      name: 'Hamburg',
+      location: {
+        latitude: 53.550341,
+        longitude: 10.000654,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 53.529341,
+      longitude: 9.975654,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 3.2,
+  },
+  {
+    id: '00ceeeef-fd54-4723-a313-1dd19a57aa77',
+    title: 'Wood and stone place',
+    type: 'house',
+    price: 602,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/17.jpg',
+    city: {
+      name: 'Hamburg',
+      location: {
+        latitude: 53.550341,
+        longitude: 10.000654,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 53.565341,
+      longitude: 9.980654000000001,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 3.7,
+  },
+  {
+    id: 'd86052d4-4fcb-4b33-930f-c6a67f6a6818',
+    title: 'The Joshua Tree House',
+    type: 'room',
+    price: 202,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/17.jpg',
+    city: {
+      name: 'Dusseldorf',
+      location: {
+        latitude: 51.225402,
+        longitude: 6.776314,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 51.236402000000005,
+      longitude: 6.784314,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 1.5,
+  },
+  {
+    id: '052e78ed-ac54-4bf8-be7f-c79497b4c796',
+    title: 'Wood and stone place',
+    type: 'house',
+    price: 669,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/18.jpg',
+    city: {
+      name: 'Dusseldorf',
+      location: {
+        latitude: 51.225402,
+        longitude: 6.776314,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 51.210402,
+      longitude: 6.798314,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 4.6,
+  },
+  {
+    id: 'dc1b3c04-e350-4907-b512-1dc4d503ac49',
+    title: 'Perfectly located Castro',
+    type: 'hotel',
+    price: 227,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/11.jpg',
+    city: {
+      name: 'Dusseldorf',
+      location: {
+        latitude: 51.225402,
+        longitude: 6.776314,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 51.211402,
+      longitude: 6.756314000000001,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 3.3,
+  },
+  {
+    id: '2f8ec29c-af50-482a-abf5-40d3a2fd78ce',
+    title: 'Amazing and Extremely Central Flat',
+    type: 'apartment',
+    price: 458,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/2.jpg',
+    city: {
+      name: 'Dusseldorf',
+      location: {
+        latitude: 51.225402,
+        longitude: 6.776314,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 51.228402,
+      longitude: 6.784314,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 2.3,
+  },
+  {
+    id: 'c64fada2-f853-43c7-952f-f5c0d870d612',
+    title: 'House in countryside',
+    type: 'apartment',
+    price: 243,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/8.jpg',
+    city: {
+      name: 'Dusseldorf',
+      location: {
+        latitude: 51.225402,
+        longitude: 6.776314,
+        zoom: 13,
+      },
+    },
+    location: {
+      latitude: 51.204402,
+      longitude: 6.7773140000000005,
+      zoom: 16,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 2,
+  },
 ];

@@ -2,20 +2,16 @@ import { CityName } from '../constants/const';
 
 export type Offers = {
   environment?: string;
-  name: string;
+  title: string;
   type: string;
-  link: string;
-  image: string;
+  previewImage: string;
   price: number;
   rating: number;
   isFavorite: boolean;
   isPremium: boolean;
   id: string;
   city: City;
-  location: {
-    latitude: number;
-    longitude: number;
-  };
+  location: Location;
 };
 
 type City = {

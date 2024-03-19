@@ -1,3 +1,5 @@
+import { IMAGE_LIMIT } from '../../../constants/const';
+
 const OfferGalleryItem = ({ offerImage }: { offerImage: string }) => (
   <div className="offer__image-wrapper">
     <img
@@ -14,7 +16,7 @@ function OfferGallery(): JSX.Element {
   return (
     <div className="offer__gallery-container container">
       <div className="offer__gallery">
-        {offerImages.map((offerImage, i) => <OfferGalleryItem offerImage={offerImage} key={offerImage[i]} />)}
+        {offerImages.slice(0,IMAGE_LIMIT).map((offerImage, i) => <OfferGalleryItem offerImage={offerImage} key={offerImage[i]} />)}
       </div>
     </div>
   );
