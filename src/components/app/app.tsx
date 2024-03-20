@@ -7,10 +7,10 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { HelmetProvider } from 'react-helmet-async';
-import { Offers } from '../../types/offer';
+import { FullOffer} from '../../types/offer';
 
 type AppPageProps = {
-  offers: Offers[];
+  offers: FullOffer[];
 };
 
 function App({ offers }: AppPageProps): JSX.Element {
