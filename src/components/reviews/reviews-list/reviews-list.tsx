@@ -1,7 +1,6 @@
 import { REVIEWS_LIMIT } from '../../../constants/const';
 import { Review } from '../../../types/review';
 import { sortReviewDate } from '../../../utils/function';
-// import formatRating from '../../../utils/function';
 import ReviewsItem from '../reviews-item/reviews-item';
 
 type ReviewsListProps = {

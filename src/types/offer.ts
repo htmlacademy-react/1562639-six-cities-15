@@ -1,17 +1,18 @@
 import { CityName } from '../constants/const';
+import { User } from './review';
 
 export type Offers = {
   environment?: string;
+  id: string;
   title: string;
   type: string;
-  previewImage: string;
   price: number;
-  rating: number;
-  isFavorite: boolean;
-  isPremium: boolean;
-  id: string;
   city: City;
   location: Location;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  previewImage: string;
 };
 
 type City = {
@@ -24,3 +25,14 @@ export type Location = {
   longitude: number;
   zoom: number;
 }
+
+type OfferWithDetails = {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: User;
+  images: string[];
+  maxAdults: number;
+}
+
+export type FullOffer = Offers & OfferWithDetails

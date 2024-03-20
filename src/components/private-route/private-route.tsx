@@ -18,14 +18,4 @@ const createAccessRoute = (status: AuthorizationStatus, fallback: AppRoute) =>
 const PrivateRoute = createAccessRoute(AuthorizationStatus.Auth, AppRoute.Login);
 const PublicRoute = createAccessRoute(AuthorizationStatus.NoAuth, AppRoute.Root);
 
-// function PrivateRoute(props: PrivateRouteProps): JSX.Element {
-//   const { authorizationStatus, children } = props;
-
-//   return (
-//     authorizationStatus === AuthorizationStatus.Auth
-//       ? children
-//       : <Navigate to={AppRoute.Login} />
-//   );
-// }
-
 export {PrivateRoute, PublicRoute};

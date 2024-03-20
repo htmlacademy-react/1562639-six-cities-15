@@ -39,7 +39,6 @@ function Map({
     if (map) {
       map.setView([location.latitude, location.longitude], location.zoom);
       markerLayer.current.addTo(map);
-      // markerLayer.current.clearLayers();
     }
   }, [location.latitude, location.longitude, location.zoom, map]);
 
