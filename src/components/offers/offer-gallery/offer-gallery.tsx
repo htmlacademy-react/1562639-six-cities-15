@@ -1,20 +1,21 @@
+import { IMAGE_LIMIT } from '../../../constants/const';
+import { FullOffer } from '../../../types/offer';
+
 const OfferGalleryItem = ({ offerImage }: { offerImage: string }) => (
   <div className="offer__image-wrapper">
-    <img
-      className="offer__image"
-      src={offerImage}
-      alt="Photo studio"
-    />
+    <img className="offer__image" src={offerImage} alt="Photo studio" />
   </div>
 );
 
-const offerImages : string[] = ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/apartment-01.jpg'];
+type OfferGalleryProps = Pick<FullOffer, 'images'>
 
-function OfferGallery(): JSX.Element {
+function OfferGallery({ images }: OfferGalleryProps): JSX.Element {
   return (
     <div className="offer__gallery-container container">
       <div className="offer__gallery">
-        {offerImages.map((offerImage, i) => <OfferGalleryItem offerImage={offerImage} key={offerImage[i]} />)}
+        {images.slice(0, IMAGE_LIMIT).map((offerImage, i) => (
+          <OfferGalleryItem offerImage={offerImage} key={offerImage[i]} />
+        ))}
       </div>
     </div>
   );
