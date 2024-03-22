@@ -2,14 +2,14 @@ import leaflet, { LayerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useRef } from 'react';
 import useMap from '../../hooks/useMap';
-import { Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
 import { CityName, CITIES } from '../../constants/const';
 
 type MapProps = {
   environment: string;
   city: CityName;
   activeOfferId?: string | null;
-  offers: Offers[];
+  offers: Offer[];
 };
 
 const defaultCustomIcon = leaflet.icon({

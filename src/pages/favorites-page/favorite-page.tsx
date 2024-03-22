@@ -3,10 +3,10 @@ import Footer from '../../components/footer/footer';
 import PlaceCard from '../../components/place-card/place-card';
 import { AuthorizationStatus, ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
-import { Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
 
 type FavoritesPageProps = {
-  offers: Offers[];
+  offers: Offer[];
   authorizationStatus: AuthorizationStatus;
 };
 

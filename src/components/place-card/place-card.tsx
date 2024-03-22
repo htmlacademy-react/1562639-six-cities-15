@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { HTMLAttributes } from 'react';
-import { Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
 import { PremiumMark } from '../premium-mark/premium-mark';
 import { Rating } from '../rating/rating';
 import { Price } from '../price/price';
@@ -10,7 +10,7 @@ type HTMLProps = Pick<
   HTMLAttributes<HTMLElement>,
   'onMouseEnter' | 'onMouseLeave'
 >;
-type OfferProps = Offers & HTMLProps;
+type OfferProps = Offer & HTMLProps;
 
 function PlaceCard({
   environment,

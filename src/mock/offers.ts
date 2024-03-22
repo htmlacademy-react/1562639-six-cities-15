@@ -1,6 +1,6 @@
 import { FullOffer } from '../types/offer';
 
-export const CARDS_MOCK: FullOffer[] = [
+export const offers: FullOffer[] = [
   {
     id: 'a6482170-b154-4a65-b7f8-bdc10c9a2240',
     title: 'Nice, cozy, warm big bed apartment',
