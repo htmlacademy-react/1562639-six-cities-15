@@ -1,26 +1,27 @@
 import Header from '../../components/header/header';
 import LocationList from '../../components/location-list/location-list';
 import Map from '../../components/map/map';
-import { AuthorizationStatus, CityName, ComponentEnvironment } from '../../constants/const';
+import {
+  AuthorizationStatus,
+  ComponentEnvironment,
+} from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
-import { Offer } from '../../types/offer';
 import PlaceCard from '../../components/place-card/place-card';
 import { useState } from 'react';
+import { useAppSelector } from '../../hooks/store';
 
 type MainPageProps = {
-  offers: Offer[];
   authorizationStatus: AuthorizationStatus;
-  city: CityName;
 };
 
-function MainPage({
-  offers,
-  authorizationStatus,
-  city
-}: MainPageProps): JSX.Element {
+function MainPage({ authorizationStatus }: MainPageProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+  const offers = useAppSelector((state) => state.offers);
+  const currentCity = useAppSelector((state) => state.city);
 
-  const currentOffers = offers.filter((offer) => offer.city.name === city);
+  const currentOffers = offers.filter(
+    (offer) => offer.city.name === currentCity
+  );
 
   return (
     <div className="page page--gray page--main">
@@ -32,7 +33,7 @@ function MainPage({
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationList />
+            <LocationList currentCity={currentCity} />
           </section>
         </div>
         <div className="cities">
@@ -40,7 +41,7 @@ function MainPage({
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {currentOffers.length} places to stay in {city}
+                {currentOffers.length} places to stay in {currentCity}
               </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
@@ -83,7 +84,6 @@ function MainPage({
             <div className="cities__right-section">
               <Map
                 environment={ComponentEnvironment.Cities}
-                city={city}
                 offers={currentOffers}
                 activeOfferId={activeOfferId}
               />

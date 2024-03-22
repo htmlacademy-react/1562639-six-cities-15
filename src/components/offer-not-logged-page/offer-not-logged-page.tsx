@@ -7,7 +7,6 @@ import {
   ComponentEnvironment,
 } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
-import { FullOffer } from '../../types/offer';
 import ReviewsList from '../../components/reviews/reviews-list/reviews-list';
 import { Link, useParams } from 'react-router-dom';
 import { REVIEWS } from '../../mock/reviews';
@@ -19,15 +18,11 @@ import { Rating } from '../../components/rating/rating';
 import { Price } from '../../components/price/price';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { getNearOffers } from '../../pages/offer-page/utils';
+import { useAppSelector } from '../../hooks/store';
 
-type OfferPageProps = {
-  offers: FullOffer[];
-};
-
-function OfferPage({
-  offers,
-}: OfferPageProps): JSX.Element {
+function OfferPage(): JSX.Element {
   const { id } = useParams();
+  const offers = useAppSelector((state) => state.offers);
   const foundOffer = offers.find((item): boolean => item.id === id);
 
   if (!foundOffer) {
@@ -128,7 +123,6 @@ function OfferPage({
           <Map
             environment={ComponentEnvironment.Offer}
             offers={nearOffersPlusCurrent}
-            city={foundOffer.city.name}
             activeOfferId={foundOffer.id}
           />
         </section>

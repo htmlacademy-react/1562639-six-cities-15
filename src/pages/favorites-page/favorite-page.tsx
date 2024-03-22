@@ -1,19 +1,20 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import PlaceCard from '../../components/place-card/place-card';
-import { AuthorizationStatus, ComponentEnvironment } from '../../constants/const';
+import {
+  AuthorizationStatus,
+  ComponentEnvironment,
+} from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
-import { Offer } from '../../types/offer';
+import { useAppSelector } from '../../hooks/store';
 
 type FavoritesPageProps = {
-  offers: Offer[];
   authorizationStatus: AuthorizationStatus;
 };
 
-function FavoritesPage({
-  offers,
-  authorizationStatus,
-}: FavoritesPageProps): JSX.Element {
+function FavoritesPage({authorizationStatus}: FavoritesPageProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+
   return (
     <div className="page">
       <Helmet>

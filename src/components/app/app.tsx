@@ -7,13 +7,8 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { HelmetProvider } from 'react-helmet-async';
-import { FullOffer} from '../../types/offer';
 
-type AppPageProps = {
-  offers: FullOffer[];
-};
-
-function App({ offers }: AppPageProps): JSX.Element {
+function App(): JSX.Element {
   const authorization = AuthorizationStatus.Auth;
 
   return (
@@ -30,9 +25,7 @@ function App({ offers }: AppPageProps): JSX.Element {
               path={`/${city.slug}`}
               element={
                 <MainPage
-                  offers={offers}
                   authorizationStatus={authorization}
-                  city={city.name}
                 />
               }
             />
@@ -42,7 +35,6 @@ function App({ offers }: AppPageProps): JSX.Element {
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
                 <FavoritesPage
-                  offers={offers}
                   authorizationStatus={authorization}
                 />
               </PrivateRoute>
@@ -59,7 +51,7 @@ function App({ offers }: AppPageProps): JSX.Element {
           <Route
             path={AppRoute.Offer}
             element={
-              <OfferPage offers={offers} authorizationStatus={authorization} />
+              <OfferPage authorizationStatus={authorization} />
             }
           />
           <Route path="*" element={<NotFoundPage />} />
