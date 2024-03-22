@@ -19,9 +19,7 @@ function MainPage({ authorizationStatus }: MainPageProps): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const currentCity = useAppSelector((state) => state.city);
 
-  const currentOffers = offers.filter(
-    (offer) => offer.city.name === currentCity
-  );
+  const currentOffers = offers.filter((offer) => offer.city.name === currentCity);
 
   return (
     <div className="page page--gray page--main">

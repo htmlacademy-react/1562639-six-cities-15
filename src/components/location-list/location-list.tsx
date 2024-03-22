@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { CITIES, CityName } from '../../constants/const';
 import classNames from 'classnames';
-import { setCity } from '../../store/reducer';
 import { useAppDispatch } from '../../hooks/store';
+import { offersAction } from '../../store/slices/offers';
 
 type LocationListProps = {
   currentCity: CityName;
@@ -20,7 +20,7 @@ function LocationList({currentCity}: LocationListProps): JSX.Element {
             })}
             onClick={(evt) => {
               evt.preventDefault();
-              dispatch(setCity(city.name));
+              dispatch(offersAction.setCity(city.name));
             }}
             to={`/${city.slug}`}
           >
