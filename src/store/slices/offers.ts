@@ -2,11 +2,11 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { CITIES, CityName } from '../../constants/const';
 import { offers } from '../../mock/offers';
-import { Offer } from '../../types/offer';
+import { FullOffer } from '../../types/offer';
 
 interface OffersState {
   city: CityName;
-  offers: Offer[];
+  offers: FullOffer[];
 }
 
 const initialState: OffersState = {

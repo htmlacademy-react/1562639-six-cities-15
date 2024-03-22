@@ -28,7 +28,7 @@ type OfferPageProps = {
 
 function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
   const { id } = useParams();
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector((state) => state.offers.offers);
   const foundOffer = offers.find((item): boolean => item.id === id);
 
   if (!foundOffer) {
