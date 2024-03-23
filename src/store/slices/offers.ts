@@ -22,8 +22,13 @@ const offersSlice = createSlice({
       state.city = action.payload;
     },
   },
+  selectors: {
+    city: (state: OffersState) => state.city,
+    offers: (state: OffersState) => state.offers,
+  }
 });
 
 const offersAction = offersSlice.actions;
+const offersSelecrors = offersSlice.selectors;
 
-export {offersAction, offersSlice};
+export {offersAction, offersSelecrors, offersSlice};

@@ -7,13 +7,14 @@ import {
 } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/store';
+import { offersSelecrors } from '../../store/slices/offers';
 
 type FavoritesPageProps = {
   authorizationStatus: AuthorizationStatus;
 };
 
 function FavoritesPage({authorizationStatus}: FavoritesPageProps): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(offersSelecrors.offers);
 
   return (
     <div className="page">

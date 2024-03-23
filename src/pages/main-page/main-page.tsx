@@ -9,7 +9,7 @@ import { Helmet } from 'react-helmet-async';
 import PlaceCard from '../../components/place-card/place-card';
 import { useState } from 'react';
 import { useAppSelector } from '../../hooks/store';
-import { selectCity, selectOffers } from '../../store/selectors/offers';
+import { offersSelecrors } from '../../store/slices/offers';
 
 type MainPageProps = {
   authorizationStatus: AuthorizationStatus;
@@ -17,8 +17,8 @@ type MainPageProps = {
 
 function MainPage({ authorizationStatus }: MainPageProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
-  const offers = useAppSelector(selectOffers);
-  const currentCity = useAppSelector(selectCity);
+  const offers = useAppSelector(offersSelecrors.offers);
+  const currentCity = useAppSelector(offersSelecrors.city);
 
   const currentOffers = offers.filter((offer) => offer.city.name === currentCity);
 
