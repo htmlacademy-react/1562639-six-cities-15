@@ -11,7 +11,6 @@ import PlaceCard from '../../components/place-card/place-card';
 import { useState } from 'react';
 import { useAppSelector } from '../../hooks/store';
 import { offersSelecrors } from '../../store/slices/offers';
-import { FullOffer } from '../../types/offer';
 import classNames from 'classnames';
 
 type MainPageProps = {
@@ -23,14 +22,7 @@ function MainPage({ city, authorizationStatus }: MainPageProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
   const offers = useAppSelector(offersSelecrors.offers);
 
-  const offersByCity: Partial<Record<CityName, FullOffer[]>> = {};
-
-  for (const offer of offers) {
-    if (!offersByCity[offer.city.name]) {
-      offersByCity[offer.city.name] = [];
-    }
-    offersByCity[offer.city.name]!.push(offer);
-  }
+  const offersByCity = Object.groupBy(offers, (offer) => offer.city.name);
 
   const currentOffers = offersByCity[city] ?? [];
 
