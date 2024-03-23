@@ -25,6 +25,7 @@ function App(): JSX.Element {
               path={`/${city.slug}`}
               element={
                 <MainPage
+                  city={city.name}
                   authorizationStatus={authorization}
                 />
               }

@@ -1,31 +1,17 @@
-import { Link } from 'react-router-dom';
-import { CITIES, CityName } from '../../constants/const';
+import { NavLink } from 'react-router-dom';
+import { CITIES } from '../../constants/const';
 import classNames from 'classnames';
-import { useActionCreators } from '../../hooks/store';
-import { offersAction } from '../../store/slices/offers';
 
-type LocationListProps = {
-  currentCity: CityName;
-}
 
-function LocationList({currentCity}: LocationListProps): JSX.Element {
-  const {setCity} = useActionCreators(offersAction);
+function LocationList(): JSX.Element {
+  // const {setCity} = useActionCreators(offersAction);
   return (
     <ul className="locations__list tabs__list">
-      {CITIES.map((city) => (
-        <li className="locations__item" key={city.name}>
-          <Link
-            className={classNames('locations__item-link tabs__item', {
-              'tabs__item--active': city.name === currentCity,
-            })}
-            onClick={(evt) => {
-              evt.preventDefault();
-              setCity(city.name);
-            }}
-            to={`/${city.slug}`}
-          >
-            <span>{city.name}</span>
-          </Link>
+      {CITIES.map(({name, slug}) => (
+        <li className="locations__item" key={slug}>
+          <NavLink className={({ isActive }) => classNames('locations__item-link tabs__item', {'tabs__item--active': isActive})} to={`/${slug}`}>
+            <span>{name}</span>
+          </NavLink>
         </li>
       ))}
     </ul>

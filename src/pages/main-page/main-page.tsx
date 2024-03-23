@@ -3,6 +3,7 @@ import LocationList from '../../components/location-list/location-list';
 import Map from '../../components/map/map';
 import {
   AuthorizationStatus,
+  CityName,
   ComponentEnvironment,
 } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
@@ -10,15 +11,30 @@ import PlaceCard from '../../components/place-card/place-card';
 import { useState } from 'react';
 import { useAppSelector } from '../../hooks/store';
 import { offersSelecrors } from '../../store/slices/offers';
+import { FullOffer } from '../../types/offer';
+import classNames from 'classnames';
 
 type MainPageProps = {
+  city: CityName;
   authorizationStatus: AuthorizationStatus;
 };
 
-function MainPage({ authorizationStatus }: MainPageProps): JSX.Element {
+function MainPage({ city, authorizationStatus }: MainPageProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
-  const currentOffers = useAppSelector(offersSelecrors.cityOffers);
-  const currentCity = useAppSelector(offersSelecrors.city);
+  const offers = useAppSelector(offersSelecrors.offers);
+
+  const offersByCity: Partial<Record<CityName, FullOffer[]>> = {};
+
+  for (const offer of offers) {
+    if (!offersByCity[offer.city.name]) {
+      offersByCity[offer.city.name] = [];
+    }
+    offersByCity[offer.city.name]!.push(offer);
+  }
+
+  const currentOffers = offersByCity[city] ?? [];
+
+  const isEmpty = currentOffers.length === 0;
 
   return (
     <div className="page page--gray page--main">
@@ -26,11 +42,11 @@ function MainPage({ authorizationStatus }: MainPageProps): JSX.Element {
         <title>6 Cities</title>
       </Helmet>
       <Header authorizationStatus={authorizationStatus} />
-      <main className="page__main page__main--index">
+      <main className={classNames('page__main', 'page__main--index', {'page__main--index-empty' : isEmpty})}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationList currentCity={currentCity} />
+            <LocationList />
           </section>
         </div>
         <div className="cities">
@@ -38,7 +54,7 @@ function MainPage({ authorizationStatus }: MainPageProps): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {currentOffers.length} places to stay in {currentCity}
+                {offers.length} places to stay in {city}
               </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
@@ -67,7 +83,7 @@ function MainPage({ authorizationStatus }: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {currentOffers.map((offer) => (
+                {offers.map((offer) => (
                   <PlaceCard
                     environment={ComponentEnvironment.Cities}
                     key={`${offer.id}`}
@@ -81,7 +97,7 @@ function MainPage({ authorizationStatus }: MainPageProps): JSX.Element {
             <div className="cities__right-section">
               <Map
                 environment={ComponentEnvironment.Cities}
-                offers={currentOffers}
+                offers={offers}
                 activeOfferId={activeOfferId}
               />
             </div>
