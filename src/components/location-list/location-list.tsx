@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { CITIES, CityName } from '../../constants/const';
 import classNames from 'classnames';
-import { useAppDispatch } from '../../hooks/store';
+import { useActionCreators } from '../../hooks/store';
 import { offersAction } from '../../store/slices/offers';
 
 type LocationListProps = {
@@ -9,7 +9,7 @@ type LocationListProps = {
 }
 
 function LocationList({currentCity}: LocationListProps): JSX.Element {
-  const dispatch = useAppDispatch();
+  const {setCity} = useActionCreators(offersAction);
   return (
     <ul className="locations__list tabs__list">
       {CITIES.map((city) => (
@@ -20,7 +20,7 @@ function LocationList({currentCity}: LocationListProps): JSX.Element {
             })}
             onClick={(evt) => {
               evt.preventDefault();
-              dispatch(offersAction.setCity(city.name));
+              setCity(city.name);
             }}
             to={`/${city.slug}`}
           >
