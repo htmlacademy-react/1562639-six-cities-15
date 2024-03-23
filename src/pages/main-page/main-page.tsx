@@ -17,10 +17,8 @@ type MainPageProps = {
 
 function MainPage({ authorizationStatus }: MainPageProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
-  const offers = useAppSelector(offersSelecrors.offers);
+  const currentOffers = useAppSelector(offersSelecrors.cityOffers);
   const currentCity = useAppSelector(offersSelecrors.city);
-
-  const currentOffers = offers.filter((offer) => offer.city.name === currentCity);
 
   return (
     <div className="page page--gray page--main">
