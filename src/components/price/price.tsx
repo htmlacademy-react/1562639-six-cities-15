@@ -1,6 +1,6 @@
-import { Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
 
-type PriceProps = Pick<Offers, 'price'> & ClassNameProps;
+type PriceProps = Pick<Offer, 'price'> & ClassNameProps;
 type ClassNameProps = {
   classStart: string;
 }

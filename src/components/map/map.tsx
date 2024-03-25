@@ -2,14 +2,12 @@ import leaflet, { LayerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useRef } from 'react';
 import useMap from '../../hooks/useMap';
-import { Offers } from '../../types/offer';
-import { CityName, CITIES } from '../../constants/const';
+import { Offer } from '../../types/offer';
 
 type MapProps = {
   environment: string;
-  city: CityName;
   activeOfferId?: string | null;
-  offers: Offers[];
+  offers: Offer[];
 };
 
 const defaultCustomIcon = leaflet.icon({
@@ -26,12 +24,11 @@ const currentCustomIcon = leaflet.icon({
 
 function Map({
   environment,
-  city,
   offers,
   activeOfferId,
 }: MapProps): JSX.Element {
   const mapRef = useRef<HTMLDivElement>(null);
-  const location = CITIES.find(({ name }) => name === city)!.location;
+  const location = offers[0].city.location;
   const map = useMap({ mapRef, location});
   const markerLayer = useRef<LayerGroup>(leaflet.layerGroup());
 

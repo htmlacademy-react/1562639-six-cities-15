@@ -1,7 +1,7 @@
 import { CityName } from '../constants/const';
 import { User } from './review';
 
-export type Offers = {
+export type Offer = {
   environment?: string;
   id: string;
   title: string;
@@ -35,4 +35,4 @@ type OfferWithDetails = {
   maxAdults: number;
 }
 
-export type FullOffer = Offers & OfferWithDetails
+export type FullOffer = Offer & OfferWithDetails

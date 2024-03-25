@@ -1,7 +1,7 @@
-import { Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
 import { formatRating } from '../../utils/function';
 
-type RatingProps = Pick<Offers, 'rating'> & ClassNameProps;
+type RatingProps = Pick<Offer, 'rating'> & ClassNameProps;
 type ClassNameProps = {
   classStart: string;
 };

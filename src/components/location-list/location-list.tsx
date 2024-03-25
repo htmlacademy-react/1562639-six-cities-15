@@ -2,13 +2,15 @@ import { NavLink } from 'react-router-dom';
 import { CITIES } from '../../constants/const';
 import classNames from 'classnames';
 
+
 function LocationList(): JSX.Element {
+  // const {setCity} = useActionCreators(offersAction);
   return (
     <ul className="locations__list tabs__list">
-      {CITIES.map((city) => (
-        <li className="locations__item" key={city.name}>
-          <NavLink className={({ isActive }) => classNames('locations__item-link tabs__item', {'tabs__item--active': isActive})} to={`/${city.slug}`}>
-            <span>{city.name}</span>
+      {CITIES.map(({name, slug}) => (
+        <li className="locations__item" key={slug}>
+          <NavLink className={({ isActive }) => classNames('locations__item-link tabs__item', {'tabs__item--active': isActive})} to={`/${slug}`}>
+            <span>{name}</span>
           </NavLink>
         </li>
       ))}

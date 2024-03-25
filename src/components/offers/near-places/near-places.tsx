@@ -1,9 +1,9 @@
 import PlaceCard from '../../place-card/place-card';
 import { ComponentEnvironment, NEAR_PLACES_LIMIT } from '../../../constants/const';
-import { Offers } from '../../../types/offer';
+import { Offer } from '../../../types/offer';
 
 type NearPlacesProps = {
-  offers: Offers[];
+  offers: Offer[];
 }
 
 function NearPlaces({offers} : NearPlacesProps): JSX.Element {

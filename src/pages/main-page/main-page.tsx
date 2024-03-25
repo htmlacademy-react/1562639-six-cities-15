@@ -1,26 +1,32 @@
 import Header from '../../components/header/header';
 import LocationList from '../../components/location-list/location-list';
 import Map from '../../components/map/map';
-import { AuthorizationStatus, CityName, ComponentEnvironment } from '../../constants/const';
+import {
+  AuthorizationStatus,
+  CityName,
+  ComponentEnvironment,
+} from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
-import { Offers } from '../../types/offer';
 import PlaceCard from '../../components/place-card/place-card';
 import { useState } from 'react';
+import { useAppSelector } from '../../hooks/store';
+import { offersSelecrors } from '../../store/slices/offers';
+import classNames from 'classnames';
 
 type MainPageProps = {
-  offers: Offers[];
-  authorizationStatus: AuthorizationStatus;
   city: CityName;
+  authorizationStatus: AuthorizationStatus;
 };
 
-function MainPage({
-  offers,
-  authorizationStatus,
-  city
-}: MainPageProps): JSX.Element {
+function MainPage({ city, authorizationStatus }: MainPageProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+  const offers = useAppSelector(offersSelecrors.offers);
 
-  const currentOffers = offers.filter((offer) => offer.city.name === city);
+  const offersByCity = Object.groupBy(offers, (offer) => offer.city.name);
+
+  const currentOffers = offersByCity[city] ?? [];
+
+  const isEmpty = currentOffers.length === 0;
 
   return (
     <div className="page page--gray page--main">
@@ -28,7 +34,7 @@ function MainPage({
         <title>6 Cities</title>
       </Helmet>
       <Header authorizationStatus={authorizationStatus} />
-      <main className="page__main page__main--index">
+      <main className={classNames('page__main', 'page__main--index', {'page__main--index-empty' : isEmpty})}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
@@ -40,7 +46,7 @@ function MainPage({
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {currentOffers.length} places to stay in {city}
+                {offers.length} places to stay in {city}
               </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
@@ -69,7 +75,7 @@ function MainPage({
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {currentOffers.map((offer) => (
+                {offers.map((offer) => (
                   <PlaceCard
                     environment={ComponentEnvironment.Cities}
                     key={`${offer.id}`}
@@ -83,8 +89,7 @@ function MainPage({
             <div className="cities__right-section">
               <Map
                 environment={ComponentEnvironment.Cities}
-                city={city}
-                offers={currentOffers}
+                offers={offers}
                 activeOfferId={activeOfferId}
               />
             </div>
