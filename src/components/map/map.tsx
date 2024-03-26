@@ -3,10 +3,13 @@ import 'leaflet/dist/leaflet.css';
 import { useEffect, useRef } from 'react';
 import useMap from '../../hooks/useMap';
 import { Offer } from '../../types/offer';
+import { CITIES, CityName } from '../../constants/const';
+import { useAppSelector } from '../../hooks/store';
+import { offersSelectors } from '../../store/slices/offers';
 
 type MapProps = {
   environment: string;
-  activeOfferId?: string | null;
+  city: CityName;
   offers: Offer[];
 };
 
@@ -24,11 +27,12 @@ const currentCustomIcon = leaflet.icon({
 
 function Map({
   environment,
+  city,
   offers,
-  activeOfferId,
 }: MapProps): JSX.Element {
   const mapRef = useRef<HTMLDivElement>(null);
-  const location = offers[0].city.location;
+  const activeId = useAppSelector(offersSelectors.activeId);
+  const location = CITIES.find(({ name }) => name === city)!.location;
   const map = useMap({ mapRef, location});
   const markerLayer = useRef<LayerGroup>(leaflet.layerGroup());
 
@@ -50,7 +54,7 @@ function Map({
             },
             {
               icon:
-                activeOfferId && offer.id === activeOfferId
+                offer.id === activeId
                   ? currentCustomIcon
                   : defaultCustomIcon,
             }
@@ -62,7 +66,7 @@ function Map({
         layer.clearLayers();
       };
     }
-  }, [activeOfferId, map, offers]);
+  }, [activeId, map, offers]);
 
   return (
     <section className={`${environment}__map map`} ref={mapRef} />

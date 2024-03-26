@@ -6,10 +6,7 @@ import { PremiumMark } from '../premium-mark/premium-mark';
 import { Rating } from '../rating/rating';
 import { Price } from '../price/price';
 
-type HTMLProps = Pick<
-  HTMLAttributes<HTMLElement>,
-  'onMouseEnter' | 'onMouseLeave'
->;
+type HTMLProps = Pick<HTMLAttributes<HTMLElement>, 'onMouseEnter' | 'onMouseLeave'>;
 type OfferProps = Offer & HTMLProps;
 
 function PlaceCard({
@@ -35,6 +32,7 @@ function PlaceCard({
   return (
     <article
       className={`${environment}__card place-card`}
+      data-id={id}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >

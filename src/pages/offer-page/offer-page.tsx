@@ -21,7 +21,7 @@ import { OfferFeatures } from '../../components/offers/offer-features/offer-feat
 import { Rating } from '../../components/rating/rating';
 import { Price } from '../../components/price/price';
 import { useAppSelector } from '../../hooks/store';
-import { offersSelecrors } from '../../store/slices/offers';
+import { offersSelectors } from '../../store/slices/offers';
 
 type OfferPageProps = {
   authorizationStatus: AuthorizationStatus;
@@ -29,7 +29,7 @@ type OfferPageProps = {
 
 function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
   const { id } = useParams();
-  const offers = useAppSelector(offersSelecrors.offers);
+  const offers = useAppSelector(offersSelectors.offers);
   const foundOffer = offers.find((item): boolean => item.id === id);
 
   if (!foundOffer) {
@@ -102,7 +102,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
           <Map
             environment={ComponentEnvironment.Offer}
             offers={nearOffersPlusCurrent}
-            activeOfferId={foundOffer.id}
+            city={offerPage.city.name}
           />
         </section>
         <div className="container">

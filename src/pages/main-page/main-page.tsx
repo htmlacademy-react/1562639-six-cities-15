@@ -8,10 +8,10 @@ import {
 } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
 import PlaceCard from '../../components/place-card/place-card';
-import { useState } from 'react';
-import { useAppSelector } from '../../hooks/store';
-import { offersSelecrors } from '../../store/slices/offers';
+import { useActionCreators, useAppSelector } from '../../hooks/store';
+import { offersActions, offersSelectors } from '../../store/slices/offers';
 import classNames from 'classnames';
+import { MouseEvent } from 'react';
 
 type MainPageProps = {
   city: CityName;
@@ -19,8 +19,19 @@ type MainPageProps = {
 };
 
 function MainPage({ city, authorizationStatus }: MainPageProps): JSX.Element {
-  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
-  const offers = useAppSelector(offersSelecrors.offers);
+  const {setActiveId} = useActionCreators(offersActions);
+
+  const handleMouseEnter = (evt: MouseEvent<HTMLElement>) => {
+    const target = evt.currentTarget as HTMLElement;
+    const id = target.dataset.id;
+    setActiveId(id);
+  };
+
+  const handleMouseLeave = () => {
+    setActiveId(undefined);
+  };
+
+  const offers = useAppSelector(offersSelectors.offers);
 
   const offersByCity = Object.groupBy(offers, (offer) => offer.city.name);
 
@@ -46,7 +57,7 @@ function MainPage({ city, authorizationStatus }: MainPageProps): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {offers.length} places to stay in {city}
+                {currentOffers.length} places to stay in {city}
               </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
@@ -75,13 +86,13 @@ function MainPage({ city, authorizationStatus }: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => (
+                {currentOffers.map((offer) => (
                   <PlaceCard
                     environment={ComponentEnvironment.Cities}
                     key={`${offer.id}`}
                     {...offer}
-                    onMouseEnter={() => setActiveOfferId(offer.id)}
-                    onMouseLeave={() => setActiveOfferId(null)}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                   />
                 ))}
               </div>
@@ -90,7 +101,7 @@ function MainPage({ city, authorizationStatus }: MainPageProps): JSX.Element {
               <Map
                 environment={ComponentEnvironment.Cities}
                 offers={offers}
-                activeOfferId={activeOfferId}
+                city={city}
               />
             </div>
           </div>
