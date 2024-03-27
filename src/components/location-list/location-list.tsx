@@ -4,7 +4,6 @@ import classNames from 'classnames';
 
 
 function LocationList(): JSX.Element {
-  // const {setCity} = useActionCreators(offersAction);
   return (
     <ul className="locations__list tabs__list">
       {CITIES.map(({name, slug}) => (
