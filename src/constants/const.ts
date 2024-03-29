@@ -36,3 +36,18 @@ export const URL_MARKER_CURRENT = '../../../public/img/pin-active.svg';
 export const IMAGE_LIMIT = 6;
 export const NEAR_PLACES_LIMIT = 3;
 export const REVIEWS_LIMIT = 10;
+
+export const enum RequestStatus {
+  Idle,
+  Loading,
+  Success,
+  Failed
+}
+
+export const EndPoint = {
+  Comments: '/comments',
+  Favotite: '/favorite',
+  Login: '/login',
+  Logout: '/logout',
+  Offers: '/offers',
+};

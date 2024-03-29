@@ -5,6 +5,7 @@ import {
   AuthorizationStatus,
   CityName,
   ComponentEnvironment,
+  RequestStatus,
 } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
 import PlaceCard from '../../components/place-card/place-card';
@@ -15,6 +16,7 @@ import { MouseEvent, useState } from 'react';
 import MainEmptyPage from '../../components/main-empty-page/main-empty-page';
 import Sort from '../../components/sort/sort';
 import { SortOption } from '../../components/sort/const';
+import { Loader } from '../../components/loader/loader';
 
 type MainPageProps = {
   city: CityName;
@@ -44,6 +46,13 @@ function MainPage({ city, authorizationStatus }: MainPageProps): JSX.Element {
   const isEmpty = currentOffers.length === 0;
 
   let sortedOffers = currentOffers;
+
+  const status = useAppSelector(offersSelectors.offersStatus);
+  if (status === RequestStatus.Loading) {
+    return (
+      <Loader />
+    );
+  }
 
   if (activeSort === SortOption.PriceLowToHigh) {
     sortedOffers = currentOffers.toSorted((a, b) => a.price - b.price);

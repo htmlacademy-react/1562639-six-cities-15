@@ -7,9 +7,16 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { HelmetProvider } from 'react-helmet-async';
+import { useAppDispatch } from '../../hooks/store';
+import { useEffect } from 'react';
+import { fetchAllOffers } from '../../store/thunks/offer';
 
 function App(): JSX.Element {
   const authorization = AuthorizationStatus.Auth;
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchAllOffers());
+  });
 
   return (
     <HelmetProvider>
