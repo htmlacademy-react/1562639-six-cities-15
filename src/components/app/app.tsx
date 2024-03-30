@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Route, BrowserRouter, Routes, Navigate } from 'react-router-dom';
 import { PrivateRoute, PublicRoute } from '../private-route/private-route';
 import { AppRoute, AuthorizationStatus, CITIES } from '../../constants/const';
@@ -7,15 +8,20 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { HelmetProvider } from 'react-helmet-async';
-import { useAppDispatch } from '../../hooks/store';
+import { useActionCreators } from '../../hooks/store';
 import { useEffect } from 'react';
-import { fetchAllOffers } from '../../store/thunks/offer';
+import { offersActions } from '../../store/slices/offers';
 
 function App(): JSX.Element {
   const authorization = AuthorizationStatus.Auth;
-  const dispatch = useAppDispatch();
+  const { fetchAllOffers } = useActionCreators(offersActions);
   useEffect(() => {
-    dispatch(fetchAllOffers());
+    fetchAllOffers()
+      .unwrap()
+      .then(() => {
+        console.log('SUCCESS');
+      })
+      .catch(() => console.log('ERROR'));
   });
 
   return (
@@ -42,9 +48,7 @@ function App(): JSX.Element {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <FavoritesPage
-                  authorizationStatus={authorization}
-                />
+                <FavoritesPage authorizationStatus={authorization} />
               </PrivateRoute>
             }
           />
@@ -58,9 +62,7 @@ function App(): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={
-              <OfferPage authorizationStatus={authorization} />
-            }
+            element={<OfferPage authorizationStatus={authorization} />}
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

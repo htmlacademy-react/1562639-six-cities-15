@@ -1,20 +1,19 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import type { FullOffer } from '../../types/offer';
+import type { Offer } from '../../types/offer';
 
-import { offers } from '../../mock/offers';
 import { RequestStatus } from '../../constants/const';
 import { fetchAllOffers } from '../thunks/offer';
 
 
 interface OffersState {
-  activeId?: FullOffer['id'];
-  offers: FullOffer[];
+  activeId?: Offer['id'];
+  offers: Offer[];
   status: RequestStatus;
 }
 
 const initialState: OffersState = {
-  offers,
+  offers: [],
   status: RequestStatus.Idle,
 };
 
@@ -35,7 +34,7 @@ const offersSlice = createSlice({
   initialState,
   name: 'offers',
   reducers: {
-    setActiveId(state, action: PayloadAction<FullOffer['id'] | undefined>) {
+    setActiveId(state, action: PayloadAction<Offer['id'] | undefined>) {
       state.activeId = action.payload;
     }
   },
@@ -46,7 +45,7 @@ const offersSlice = createSlice({
   },
 });
 
-const offersActions = offersSlice.actions;
+const offersActions = {...offersSlice.actions, fetchAllOffers};
 const offersSelectors = offersSlice.selectors;
 
 export { offersActions, offersSelectors, offersSlice };
