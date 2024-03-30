@@ -19,8 +19,10 @@ function App(): JSX.Element {
     fetchAllOffers()
       .unwrap()
       .then(() => {
+        // eslint-disable-next-line no-console
         console.log('SUCCESS');
       })
+      // eslint-disable-next-line no-console
       .catch(() => console.log('ERROR'));
   });
 

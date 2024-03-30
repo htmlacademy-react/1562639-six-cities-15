@@ -19,9 +19,11 @@ const useActionCreators = <Actions extends ActionCreatorsMapObject>(actions: Act
 };
 
 type BoundActions<Actions extends ActionCreatorsMapObject> = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key in keyof Actions]: Actions[key] extends AsyncThunk<any, any, any> ? BoundAsyncThunk<Actions[key]> : Actions[key];
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type BoundAsyncThunk<Thunk extends AsyncThunk<any, any, any>> = (...args: Parameters<Thunk>) => ReturnType<ReturnType<Thunk>>;
 
 export {useActionCreators, useAppDispatch, useAppSelector, useAppStore};
