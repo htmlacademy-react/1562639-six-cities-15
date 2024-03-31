@@ -11,7 +11,7 @@ function NotFoundPage(): JSX.Element {
       <h1>404</h1>
       <p>Page not found</p>
       <Link className="not-found__link" to="/">
-        Вернуться на главную
+        Go back to the main page
       </Link>
     </div>
   );

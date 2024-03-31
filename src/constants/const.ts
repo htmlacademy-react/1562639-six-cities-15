@@ -46,7 +46,7 @@ export const enum RequestStatus {
 
 export const EndPoint = {
   Comments: '/comments',
-  Favotite: '/favorite',
+  Favorite: '/favorite',
   Login: '/login',
   Logout: '/logout',
   Offers: '/offers',

@@ -8,15 +8,11 @@ import {
   RequestStatus,
 } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
-import PlaceCard from '../../components/place-card/place-card';
-import { useActionCreators, useAppSelector } from '../../hooks/store';
-import { offersActions, offersSelectors } from '../../store/slices/offers';
 import classNames from 'classnames';
-import { MouseEvent, useState } from 'react';
 import MainEmptyPage from '../../components/main-empty-page/main-empty-page';
-import Sort from '../../components/sort/sort';
-import { SortOption } from '../../components/sort/const';
 import { Loader } from '../../components/loader/loader';
+import { useFetchCityOffers } from './hook';
+import { SortingOffers } from '../../components/sorting-offers/sorting-offers';
 
 type MainPageProps = {
   city: CityName;
@@ -24,46 +20,15 @@ type MainPageProps = {
 };
 
 function MainPage({ city, authorizationStatus }: MainPageProps): JSX.Element {
-  const { setActiveId } = useActionCreators(offersActions);
-  const [activeSort, setActiveSort] = useState(SortOption.Popular);
 
-  const handleMouseEnter = (evt: MouseEvent<HTMLElement>) => {
-    const target = evt.currentTarget as HTMLElement;
-    const id = target.dataset.id;
-    setActiveId(id);
-  };
+  const {offers, status} = useFetchCityOffers(city);
 
-  const handleMouseLeave = () => {
-    setActiveId(undefined);
-  };
+  const isEmpty = offers.length === 0;
 
-  const offers = useAppSelector(offersSelectors.offers);
-
-  const offersByCity = Object.groupBy(offers, (offer) => offer.city.name);
-
-  const currentOffers = offersByCity[city] ?? [];
-
-  const isEmpty = currentOffers.length === 0;
-
-  let sortedOffers = currentOffers;
-
-  const status = useAppSelector(offersSelectors.offersStatus);
   if (status === RequestStatus.Loading) {
     return (
       <Loader />
     );
-  }
-
-  if (activeSort === SortOption.PriceLowToHigh) {
-    sortedOffers = currentOffers.toSorted((a, b) => a.price - b.price);
-  }
-
-  if (activeSort === SortOption.PriceHighToLow) {
-    sortedOffers = currentOffers.toSorted((a, b) => b.price - a.price);
-  }
-
-  if (activeSort === SortOption.TopRatedFirst) {
-    sortedOffers = currentOffers.toSorted((a, b) => b.rating - a.rating);
   }
 
   return (
@@ -96,21 +61,10 @@ function MainPage({ city, authorizationStatus }: MainPageProps): JSX.Element {
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">
-                    {currentOffers.length} place
-                    {currentOffers.length > 1 && 's'} to stay in {city}
+                    {offers.length} place
+                    {offers.length > 1 && 's'} to stay in {city}
                   </b>
-                  <Sort current={activeSort} setter={setActiveSort} />
-                  <div className="cities__places-list places__list tabs__content">
-                    {sortedOffers.map((offer) => (
-                      <PlaceCard
-                        environment={ComponentEnvironment.Cities}
-                        key={`${offer.id}`}
-                        {...offer}
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                      />
-                    ))}
-                  </div>
+                  <SortingOffers offers={offers} />
                 </section>
                 <div className="cities__right-section">
                   <Map

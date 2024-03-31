@@ -8,23 +8,9 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { HelmetProvider } from 'react-helmet-async';
-import { useActionCreators } from '../../hooks/store';
-import { useEffect } from 'react';
-import { offersActions } from '../../store/slices/offers';
 
 function App(): JSX.Element {
   const authorization = AuthorizationStatus.Auth;
-  const { fetchAllOffers } = useActionCreators(offersActions);
-  useEffect(() => {
-    fetchAllOffers()
-      .unwrap()
-      .then(() => {
-        // eslint-disable-next-line no-console
-        console.log('SUCCESS');
-      })
-      // eslint-disable-next-line no-console
-      .catch(() => console.log('ERROR'));
-  });
 
   return (
     <HelmetProvider>
