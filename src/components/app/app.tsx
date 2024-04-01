@@ -1,16 +1,27 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Route, BrowserRouter, Routes, Navigate } from 'react-router-dom';
-import { PrivateRoute, PublicRoute } from '../private-route/private-route';
-import { AppRoute, AuthorizationStatus, CITIES } from '../../constants/const';
+import ProtectedRoute from '../private-route/private-route';
+import { AppRoute, CITIES } from '../../constants/const';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorite-page';
 import LoginPage from '../../pages/login-page/login-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { HelmetProvider } from 'react-helmet-async';
+import { useActionCreators } from '../../hooks/store';
+import { userActions } from '../../store/slices/user';
+import { getToken } from '../../services/token';
+import { useEffect } from 'react';
 
 function App(): JSX.Element {
-  const authorization = AuthorizationStatus.Auth;
+  const {checkAuth} = useActionCreators(userActions);
+
+  const token = getToken();
+  useEffect(() => {
+    if (token) {
+      checkAuth();
+    }
+  }, [token, checkAuth]);
 
   return (
     <HelmetProvider>
@@ -27,7 +38,6 @@ function App(): JSX.Element {
               element={
                 <MainPage
                   city={city.name}
-                  authorizationStatus={authorization}
                 />
               }
             />
@@ -35,22 +45,22 @@ function App(): JSX.Element {
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <FavoritesPage authorizationStatus={authorization} />
-              </PrivateRoute>
+              <ProtectedRoute>
+                <FavoritesPage />
+              </ProtectedRoute>
             }
           />
           <Route
             path={AppRoute.Login}
             element={
-              <PublicRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+              <ProtectedRoute onlyUnAuth>
                 <LoginPage />
-              </PublicRoute>
+              </ProtectedRoute>
             }
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage authorizationStatus={authorization} />}
+            element={<OfferPage />}
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
