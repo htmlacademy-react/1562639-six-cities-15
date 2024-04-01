@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Route, BrowserRouter, Routes, Navigate } from 'react-router-dom';
 import { PrivateRoute, PublicRoute } from '../private-route/private-route';
 import { AppRoute, AuthorizationStatus, CITIES } from '../../constants/const';
@@ -35,9 +36,7 @@ function App(): JSX.Element {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <FavoritesPage
-                  authorizationStatus={authorization}
-                />
+                <FavoritesPage authorizationStatus={authorization} />
               </PrivateRoute>
             }
           />
@@ -51,9 +50,7 @@ function App(): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={
-              <OfferPage authorizationStatus={authorization} />
-            }
+            element={<OfferPage authorizationStatus={authorization} />}
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
