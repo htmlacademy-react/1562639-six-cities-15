@@ -1,12 +1,11 @@
 import OfferGallery from '../../components/offers/offer-gallery/offer-gallery';
 import OfferInside from '../../components/offers/offer-inside/offer-inside';
-import NearPlaces from '../../components/offers/near-places/near-places';
-import Map from '../../components/map/map';
-import { ComponentEnvironment } from '../../constants/const';
+// import NearPlaces from '../../components/offers/near-places/near-places';
+// import Map from '../../components/map/map';
+// import { ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
-import ReviewsList from '../../components/reviews/reviews-list/reviews-list';
+// import ReviewsList from '../../components/reviews/reviews-list/reviews-list';
 import { useParams } from 'react-router-dom';
-import { REVIEWS } from '../../mock/reviews';
 import { PremiumMark } from '../../components/premium-mark/premium-mark';
 import classNames from 'classnames';
 import { OfferHost } from '../../components/offers/offer-host/offer-host';
@@ -14,7 +13,7 @@ import { OfferFeatures } from '../../components/offers/offer-features/offer-feat
 import { Rating } from '../../components/rating/rating';
 import { Price } from '../../components/price/price';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import { getNearOffers } from '../../pages/offer-page/utils';
+// import { getNearOffers } from '../../pages/offer-page/utils';
 import { useAppSelector } from '../../hooks/store';
 import { offersSelectors } from '../../store/slices/offers';
 import Header from '../header/header';
@@ -29,8 +28,8 @@ function OfferPage(): JSX.Element {
   }
 
   const offerPage = { ...offers, ...foundOffer };
-  const nearOffers = getNearOffers(offerPage);
-  const nearOffersPlusCurrent = [offerPage, ...nearOffers];
+  // const nearOffers = getNearOffers(offerPage);
+  // const nearOffersPlusCurrent = [offerPage, ...nearOffers];
   const {
     images,
     isPremium,
@@ -81,23 +80,23 @@ function OfferPage(): JSX.Element {
               <Price price={price} classStart={'offer'} />
               <OfferInside goods={goods} />
               <OfferHost host={host} description={description} />
-              <section className="offer__reviews reviews">
+              {/* <section className="offer__reviews reviews">
                 <h2 className="reviews__title">
                   Reviews ·{' '}
                   <span className="reviews__amount">{REVIEWS.length}</span>
                 </h2>
                 <ReviewsList reviews={REVIEWS} />
-              </section>
+              </section> */}
             </div>
           </div>
-          <Map
+          {/* <Map
             environment={ComponentEnvironment.Offer}
             offers={nearOffersPlusCurrent}
             city={offerPage.city.name}
-          />
+          /> */}
         </section>
         <div className="container">
-          <NearPlaces offers={nearOffers} />
+          {/* <NearPlaces offers={nearOffers} /> */}
         </div>
       </main>
     </div>

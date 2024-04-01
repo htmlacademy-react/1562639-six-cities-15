@@ -1,16 +1,16 @@
 import Header from '../../components/header/header';
 import OfferGallery from '../../components/offers/offer-gallery/offer-gallery';
 import OfferInside from '../../components/offers/offer-inside/offer-inside';
-import NearPlaces from '../../components/offers/near-places/near-places';
-import Map from '../../components/map/map';
-import { ComponentEnvironment } from '../../constants/const';
+// import NearPlaces from '../../components/offers/near-places/near-places';
+// import Map from '../../components/map/map';
+// import { ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
-import ReviewsForm from '../../components/reviews/reviews-form/reviews-form';
-import ReviewsList from '../../components/reviews/reviews-list/reviews-list';
+// import ReviewsForm from '../../components/reviews/reviews-form/reviews-form';
+// import ReviewsList from '../../components/reviews/reviews-list/reviews-list';
 import { useParams } from 'react-router-dom';
 import NotFoundPage from '../not-found-page/not-found-page';
-import { getNearOffers } from './utils';
-import { REVIEWS } from '../../mock/reviews';
+// import { getNearOffers } from './utils';
+// import { REVIEWS } from '../../mock/reviews';
 import { PremiumMark } from '../../components/premium-mark/premium-mark';
 import classNames from 'classnames';
 import { OfferHost } from '../../components/offers/offer-host/offer-host';
@@ -31,8 +31,8 @@ function OfferPage(): JSX.Element {
   }
 
   const offerPage = { ...offers, ...foundOffer };
-  const nearOffers = getNearOffers(offerPage);
-  const nearOffersPlusCurrent = [offerPage, ...nearOffers];
+  // const nearOffers = getNearOffers(offerPage);
+  // const nearOffersPlusCurrent = [offerPage, ...nearOffers];
   const {
     images,
     isPremium,
@@ -83,24 +83,24 @@ function OfferPage(): JSX.Element {
               <Price price={price} classStart={'offer'} />
               <OfferInside goods={goods} />
               <OfferHost host={host} description={description} />
-              <section className="offer__reviews reviews">
+              {/* <section className="offer__reviews reviews">
                 <h2 className="reviews__title">
                   Reviews ·{' '}
                   <span className="reviews__amount">{REVIEWS.length}</span>
                 </h2>
                 <ReviewsList reviews={REVIEWS} />
                 <ReviewsForm />
-              </section>
+              </section> */}
             </div>
           </div>
-          <Map
+          {/* <Map
             environment={ComponentEnvironment.Offer}
             offers={nearOffersPlusCurrent}
             city={offerPage.city.name}
-          />
+          /> */}
         </section>
         <div className="container">
-          <NearPlaces offers={nearOffers} />
+          {/* <NearPlaces offers={nearOffers} /> */}
         </div>
       </main>
     </div>
