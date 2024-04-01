@@ -51,8 +51,9 @@ export const userSlice = createSlice({
     }
   },
   selectors: {
-    userStatus: (state) => state.status,
-    info: (state) => state.info
+    userRequestStatus: (state: UserState) => state.requestStatus,
+    userStatus: (state: UserState) => state.status,
+    user: (state: UserState) => state.info
   }
 });
 

@@ -3,10 +3,7 @@ import OfferGallery from '../../components/offers/offer-gallery/offer-gallery';
 import OfferInside from '../../components/offers/offer-inside/offer-inside';
 import NearPlaces from '../../components/offers/near-places/near-places';
 import Map from '../../components/map/map';
-import {
-  AuthorizationStatus,
-  ComponentEnvironment,
-} from '../../constants/const';
+import { ComponentEnvironment } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
 import ReviewsForm from '../../components/reviews/reviews-form/reviews-form';
 import ReviewsList from '../../components/reviews/reviews-list/reviews-list';
@@ -23,11 +20,8 @@ import { Price } from '../../components/price/price';
 import { useAppSelector } from '../../hooks/store';
 import { offersSelectors } from '../../store/slices/offers';
 
-type OfferPageProps = {
-  authorizationStatus: AuthorizationStatus;
-};
 
-function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
+function OfferPage(): JSX.Element {
   const { id } = useParams();
   const offers = useAppSelector(offersSelectors.offers);
   const foundOffer = offers.find((item): boolean => item.id === id);
@@ -59,7 +53,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
       <Helmet>
         <title>6 Cities - offer</title>
       </Helmet>
-      <Header authorizationStatus={authorizationStatus} />
+      <Header />
       <main className="page__main page__main--offer">
         <section className="offer">
           <OfferGallery images={images} />
