@@ -5,7 +5,7 @@ import { AppRoute, CITIES } from '../../constants/const';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorite-page';
 import LoginPage from '../../pages/login-page/login-page';
-import OfferPage from '../../pages/offer-page/offer-page';
+// import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { HelmetProvider } from 'react-helmet-async';
 import { useActionCreators } from '../../hooks/store';
@@ -58,10 +58,10 @@ function App(): JSX.Element {
               </ProtectedRoute>
             }
           />
-          <Route
+          {/* <Route
             path={AppRoute.Offer}
             element={<OfferPage />}
-          />
+          /> */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
