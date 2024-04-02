@@ -2,7 +2,6 @@ import Header from '../../components/header/header';
 import LocationList from '../../components/location-list/location-list';
 import Map from '../../components/map/map';
 import {
-  AuthorizationStatus,
   CityName,
   ComponentEnvironment,
   RequestStatus,
@@ -16,10 +15,9 @@ import { SortingOffers } from '../../components/sorting-offers/sorting-offers';
 
 type MainPageProps = {
   city: CityName;
-  authorizationStatus: AuthorizationStatus;
 };
 
-function MainPage({ city, authorizationStatus }: MainPageProps): JSX.Element {
+function MainPage({ city }: MainPageProps): JSX.Element {
 
   const {offers, status} = useFetchCityOffers(city);
 
@@ -36,7 +34,7 @@ function MainPage({ city, authorizationStatus }: MainPageProps): JSX.Element {
       <Helmet>
         <title>6 Cities</title>
       </Helmet>
-      <Header authorizationStatus={authorizationStatus} />
+      <Header />
       <main
         className={classNames('page__main', 'page__main--index', {
           'page__main--index-empty': isEmpty,

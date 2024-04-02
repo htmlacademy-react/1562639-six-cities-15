@@ -1,8 +1,33 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
+import { FormEvent, useRef } from 'react';
+import { userActions } from '../../store/slices/user';
+import { useActionCreators } from '../../hooks/store';
+
+type HTMLLoginForm = HTMLFormElement & {
+  email: HTMLInputElement;
+  password: HTMLInputElement;
+};
+
 
 function LoginPage(): JSX.Element {
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const {login} = useActionCreators(userActions);
+
+  function handleSubmit(event: FormEvent<HTMLLoginForm>) {
+    event.preventDefault();
+
+    if (loginRef.current !== null && passwordRef.current !== null) {
+      login({
+        email: loginRef.current.value,
+        password: passwordRef.current.value
+      });
+    }
+  }
+
   return (
     <div className="page page--gray page--login">
       <Helmet>
@@ -29,10 +54,16 @@ function LoginPage(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form
+              className="login__form form"
+              action="#"
+              method="post"
+              onSubmit={handleSubmit}
+            >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
+                  ref={loginRef}
                   className="login__input form__input"
                   type="email"
                   name="email"
@@ -43,6 +74,7 @@ function LoginPage(): JSX.Element {
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
                 <input
+                  ref={passwordRef}
                   className="login__input form__input"
                   type="password"
                   name="password"
