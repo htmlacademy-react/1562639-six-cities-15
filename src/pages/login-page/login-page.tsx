@@ -67,6 +67,7 @@ function LoginPage(): JSX.Element {
                   className="login__input form__input"
                   type="email"
                   name="email"
+                  pattern="([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)"
                   placeholder="Email"
                   required
                 />
@@ -78,6 +79,8 @@ function LoginPage(): JSX.Element {
                   className="login__input form__input"
                   type="password"
                   name="password"
+                  pattern="^(?=.*[a-zA-Z])(?=.*\d).+$"
+                  // ([a-zA-Z0-9]+)
                   placeholder="Password"
                   required
                 />

@@ -13,3 +13,11 @@ export type Review = {
   comment: string;
   rating: number;
 }
+
+export type ReviewToSend = {
+  offerId: string;
+  body: {
+    comment: string;
+    rating: number;
+  };
+}

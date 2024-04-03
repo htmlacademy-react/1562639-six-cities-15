@@ -11,3 +11,12 @@ export function formatDate(date: string) {
 export function sortReviewDate(a: Review, b: Review) {
   return new Date(b.date).getTime() - new Date(a.date).getTime();
 }
+
+export function upFirstLetter(string: string) {
+  if (!string) {
+    return string;
+  }
+
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+

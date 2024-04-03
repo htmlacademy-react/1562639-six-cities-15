@@ -1,4 +1,4 @@
-import { ChangeEvent, Fragment } from 'react';
+import { Fragment } from 'react';
 
 const VALUES = [
   { value: 5, title: 'perfect' },
@@ -9,21 +9,21 @@ const VALUES = [
 ];
 
 type FormRatingProps = {
-  onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
-}
+  isDisabled?: boolean;
+};
 
-function FormRating({onChange}: FormRatingProps) {
+function FormRating({ isDisabled = false }: FormRatingProps) {
   return (
     <div className="reviews__rating-form form__rating">
-      {VALUES.map(({value, title}) => (
-        <Fragment key={value}>
+      {VALUES.map(({ value, title }) => (
+        <Fragment key={`star-${title}`}>
           <input
             className="form__rating-input visually-hidden"
             name="rating"
-            value={value}
+            defaultValue={value}
             id={`${value}-stars`}
             type="radio"
-            onChange={onChange}
+            disabled={isDisabled}
           />
           <label
             htmlFor={`${value}-stars`}

@@ -1,38 +1,78 @@
-import {ChangeEvent, MouseEvent, useState} from 'react';
+import { FormEvent, useRef, useState} from 'react';
 import FormRating from '../../form-rating/form-rating';
+import { useActionCreators } from '../../../hooks/store';
+import { reviewActions } from '../../../store/slices/reviews';
+import { toast } from 'react-toastify';
+import { ReviewToSend } from '../../../types/review';
 
-function ReviewsForm() {
-  const [formData, setFormData] = useState({review: '', rating: 0});
+const REVIEW_MIN_LENGTH = 50;
+const REVIEW_MAX_LENGTH = 300;
 
-  const handleCommentChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      review: evt.target.value});
+type Form = HTMLFormElement & {
+  rating: RadioNodeList;
+  review: HTMLTextAreaElement;
+}
+
+const shouldDisableForm = (form: Form): boolean => {
+  const rating = form.rating.value;
+  const review = form.review.value;
+  return review.length < REVIEW_MIN_LENGTH || review.length > REVIEW_MAX_LENGTH || !rating;
+};
+
+function ReviewsForm({offerId}: {offerId: string}) {
+  const [isSubmitDisabled, setSubmitDisabled] = useState(true);
+  const formRef = useRef(null);
+  const {postComment} = useActionCreators(reviewActions);
+  const [isDisabled, setDisabled] = useState(false);
+
+  const handleFormChange = (evt: React.FormEvent<HTMLFormElement>) => {
+    const form = evt.currentTarget as Form;
+
+    setSubmitDisabled(shouldDisableForm(form));
   };
 
-  const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      rating: +evt.target.value
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    const form = evt.currentTarget as Form;
+    const reviewToSend: ReviewToSend = {
+      offerId,
+      body: {
+        comment: form.review.value,
+        rating: +form.rating.value,
+      },
+    };
+    setDisabled(true);
+    toast.promise(postComment(reviewToSend).unwrap(), {
+      pending: 'Sending review...',
+      success: {
+        render: () => {
+          setDisabled(false);
+          setSubmitDisabled(true);
+          form.reset();
+          return 'Review sent!';
+        }
+      },
+      error: {
+        render() {
+          setDisabled(false);
+          return 'Failed to send review. Please try again';
+        }
+      }
     });
   };
 
-  const handleFormSubmit = (evt: MouseEvent<HTMLElement>) => {
-    evt.preventDefault();
-  };
-
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onChange={handleFormChange} onSubmit={handleFormSubmit} ref={formRef}>
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <FormRating onChange={handleRatingChange} />
+      <FormRating isDisabled={isDisabled} />
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={handleCommentChange}
+        disabled={isDisabled}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -44,8 +84,7 @@ function ReviewsForm() {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          onClick={handleFormSubmit}
-          disabled={formData.review.length < 50 || formData.review.length > 300 || formData.rating === 0}
+          disabled={isSubmitDisabled}
         >
           Submit
         </button>
