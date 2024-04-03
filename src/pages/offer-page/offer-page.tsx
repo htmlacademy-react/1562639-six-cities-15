@@ -1,38 +1,66 @@
 import Header from '../../components/header/header';
 import OfferGallery from '../../components/offers/offer-gallery/offer-gallery';
 import OfferInside from '../../components/offers/offer-inside/offer-inside';
-// import NearPlaces from '../../components/offers/near-places/near-places';
-// import Map from '../../components/map/map';
-// import { ComponentEnvironment } from '../../constants/const';
+import NearPlaces from '../../components/offers/near-places/near-places';
+import Map from '../../components/map/map';
+import {
+  ComponentEnvironment,
+  NEAR_PLACES_LIMIT,
+  RequestStatus,
+} from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
-// import ReviewsForm from '../../components/reviews/reviews-form/reviews-form';
-// import ReviewsList from '../../components/reviews/reviews-list/reviews-list';
 import { useParams } from 'react-router-dom';
 import NotFoundPage from '../not-found-page/not-found-page';
-// import { getNearOffers } from './utils';
-// import { REVIEWS } from '../../mock/reviews';
 import { PremiumMark } from '../../components/premium-mark/premium-mark';
 import classNames from 'classnames';
 import { OfferHost } from '../../components/offers/offer-host/offer-host';
 import { OfferFeatures } from '../../components/offers/offer-features/offer-features';
 import { Rating } from '../../components/rating/rating';
 import { Price } from '../../components/price/price';
-import { useAppSelector } from '../../hooks/store';
-import { offersSelectors } from '../../store/slices/offers';
+import { useActionCreators, useAppSelector } from '../../hooks/store';
+import { offerActions, offerSelector } from '../../store/slices/offer';
+import { reviewActions } from '../../store/slices/reviews';
+import { useEffect, useRef } from 'react';
+import { Loader } from '../../components/loader/loader';
+import { Reviews } from '../../components/reviews/reviews';
+import { offersActions } from '../../store/slices/offers';
 
+const allActions = {
+  ...offerActions,
+  ...reviewActions,
+  ...offersActions
+};
 
 function OfferPage(): JSX.Element {
-  const { id } = useParams();
-  const offers = useAppSelector(offersSelectors.offers);
-  const foundOffer = offers.find((item): boolean => item.id === id);
+  const offer = useAppSelector(offerSelector.offer);
+  const status = useAppSelector(offerSelector.offerStatus);
+  const offersNearBy = useAppSelector(offerSelector.nearbyOffers);
 
-  if (!foundOffer) {
+  const {fetchNearBy, fetchOffer, setActiveId, fetchComments} = useActionCreators(allActions);
+
+  const { id } = useParams() as {id: string};
+  const lastId = useRef(id);
+
+  useEffect(() => {
+    const isIdle = status === RequestStatus.Idle;
+    const isChangedId = lastId.current !== id;
+
+    if (id && (isIdle || isChangedId)) {
+      setActiveId(id);
+      lastId.current = id;
+      Promise.all([fetchOffer(id), fetchNearBy(id), fetchComments(id)]);
+    }
+  }, [fetchOffer, fetchNearBy, fetchComments, setActiveId, id, status]);
+
+  if (status === RequestStatus.Idle || status === RequestStatus.Loading) {
+    <Loader />;
+  }
+
+  if (status === RequestStatus.Failed || !offer) {
     return <NotFoundPage />;
   }
 
-  const offerPage = { ...offers, ...foundOffer };
-  // const nearOffers = getNearOffers(offerPage);
-  // const nearOffersPlusCurrent = [offerPage, ...nearOffers];
+  const nearOffersPlusCurrent = [offer, ...offersNearBy.slice(0,NEAR_PLACES_LIMIT)];
   const {
     images,
     isPremium,
@@ -46,7 +74,7 @@ function OfferPage(): JSX.Element {
     host,
     maxAdults,
     description,
-  } = offerPage;
+  } = offer;
 
   return (
     <div className="page">
@@ -83,24 +111,17 @@ function OfferPage(): JSX.Element {
               <Price price={price} classStart={'offer'} />
               <OfferInside goods={goods} />
               <OfferHost host={host} description={description} />
-              {/* <section className="offer__reviews reviews">
-                <h2 className="reviews__title">
-                  Reviews ·{' '}
-                  <span className="reviews__amount">{REVIEWS.length}</span>
-                </h2>
-                <ReviewsList reviews={REVIEWS} />
-                <ReviewsForm />
-              </section> */}
+              <Reviews />
             </div>
           </div>
-          {/* <Map
+          <Map
             environment={ComponentEnvironment.Offer}
             offers={nearOffersPlusCurrent}
-            city={offerPage.city.name}
-          /> */}
+            city={offer.city.name}
+          />
         </section>
         <div className="container">
-          {/* <NearPlaces offers={nearOffers} /> */}
+          <NearPlaces offers={offersNearBy} />
         </div>
       </main>
     </div>
