@@ -48,6 +48,9 @@ export const userSlice = createSlice({
   reducers: {
     setAuthorization(state, action: PayloadAction<AuthorizationStatus>) {
       state.status = action.payload;
+    },
+    setNoAuth(state) {
+      state.status = AuthorizationStatus.NoAuth;
     }
   },
   selectors: {
