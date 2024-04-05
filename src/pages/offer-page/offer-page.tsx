@@ -28,7 +28,7 @@ import { offersActions } from '../../store/slices/offers';
 const allActions = {
   ...offerActions,
   ...reviewActions,
-  ...offersActions
+  ...offersActions,
 };
 
 function OfferPage(): JSX.Element {
@@ -36,21 +36,15 @@ function OfferPage(): JSX.Element {
   const status = useAppSelector(offerSelector.offerStatus);
   const offersNearBy = useAppSelector(offerSelector.nearbyOffers);
 
-  const {fetchNearBy, fetchOffer, setActiveId, fetchComments} = useActionCreators(allActions);
+  const { fetchNearBy, fetchOffer, setActiveId, fetchComments } =
+    useActionCreators(allActions);
 
   const { id } = useParams() as {id: string};
-  const lastId = useRef(id);
 
   useEffect(() => {
-    const isIdle = status === RequestStatus.Idle;
-    const isChangedId = lastId.current !== id;
-
-    if (id && (isIdle || isChangedId)) {
-      setActiveId(id);
-      lastId.current = id;
-      Promise.all([fetchOffer(id), fetchNearBy(id), fetchComments(id)]);
-    }
-  }, [fetchOffer, fetchNearBy, fetchComments, setActiveId, id, status]);
+    setActiveId(id);
+    Promise.all([fetchOffer(id), fetchNearBy(id), fetchComments(id)]);
+  }, [fetchOffer, fetchNearBy, fetchComments, id, setActiveId]);
 
   if (status === RequestStatus.Idle || status === RequestStatus.Loading) {
     <Loader />;
@@ -60,7 +54,10 @@ function OfferPage(): JSX.Element {
     return <NotFoundPage />;
   }
 
-  const nearOffersPlusCurrent = [offer, ...offersNearBy.slice(0,NEAR_PLACES_LIMIT)];
+  const nearOffersPlusCurrent = [
+    offer,
+    ...offersNearBy.slice(0, NEAR_PLACES_LIMIT),
+  ];
   const {
     images,
     isPremium,

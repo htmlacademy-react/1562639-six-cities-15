@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { FormEvent, useRef } from 'react';
 import { userActions } from '../../store/slices/user';
 import { useActionCreators } from '../../hooks/store';
+import { RandomCity } from '../../components/random-city/random-city';
 
 type HTMLLoginForm = HTMLFormElement & {
   email: HTMLInputElement;
@@ -80,7 +81,6 @@ function LoginPage(): JSX.Element {
                   type="password"
                   name="password"
                   pattern="^(?=.*[a-zA-Z])(?=.*\d).+$"
-                  // ([a-zA-Z0-9]+)
                   placeholder="Password"
                   required
                 />
@@ -93,13 +93,7 @@ function LoginPage(): JSX.Element {
               </button>
             </form>
           </section>
-          <section className="locations locations--login locations--current">
-            <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
-            </div>
-          </section>
+          <RandomCity />
         </div>
       </main>
     </div>
