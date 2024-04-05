@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/const';
 import { useAuth } from '../../hooks/useAuth';
 import LoggedNavigation from '../logged-navigation/logged-navigation';
+import { memo } from 'react';
 
 type NavigationProps = {
   pathname: string;
 };
 
-function Navigation({ pathname }: NavigationProps): JSX.Element {
+function Navigation_({ pathname }: NavigationProps): JSX.Element {
   const location = pathname;
   const loginLink: string = AppRoute.Login;
   const isLoginPage = loginLink === location;
@@ -37,5 +38,7 @@ function Navigation({ pathname }: NavigationProps): JSX.Element {
     </nav>
   );
 }
+
+const Navigation = memo(Navigation_);
 
 export default Navigation;

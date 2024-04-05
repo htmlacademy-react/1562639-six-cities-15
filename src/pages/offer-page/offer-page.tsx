@@ -20,7 +20,7 @@ import { Price } from '../../components/price/price';
 import { useActionCreators, useAppSelector } from '../../hooks/store';
 import { offerActions, offerSelector } from '../../store/slices/offer';
 import { reviewActions } from '../../store/slices/reviews';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { Loader } from '../../components/loader/loader';
 import { Reviews } from '../../components/reviews/reviews';
 import { offersActions } from '../../store/slices/offers';

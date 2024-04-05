@@ -1,9 +1,7 @@
 import Header from '../../components/header/header';
 import LocationList from '../../components/location-list/location-list';
-import Map from '../../components/map/map';
 import {
   CityName,
-  ComponentEnvironment,
   RequestStatus,
 } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
@@ -11,7 +9,10 @@ import classNames from 'classnames';
 import MainEmptyPage from '../../components/main-empty-page/main-empty-page';
 import { Loader } from '../../components/loader/loader';
 import { useFetchCityOffers } from './hook';
-import { SortingOffers } from '../../components/sorting-offers/sorting-offers';
+import { OfferList } from '../../components/offer-list/offer-list';
+import { useAppSelector } from '../../hooks/store';
+import { offersSelectors } from '../../store/slices/offers';
+import ErrorPage from '../error-page/error-page';
 
 type MainPageProps = {
   city: CityName;
@@ -22,6 +23,13 @@ function MainPage({ city }: MainPageProps): JSX.Element {
   const {offers, status} = useFetchCityOffers(city);
 
   const isEmpty = offers.length === 0;
+
+  const hasError = useAppSelector(offersSelectors.getErrorStatus);
+
+  if (hasError) {
+    return (
+      <ErrorPage />);
+  }
 
   if (status === RequestStatus.Loading) {
     return (
@@ -55,23 +63,7 @@ function MainPage({ city }: MainPageProps): JSX.Element {
             {isEmpty ? (
               <MainEmptyPage city={city} />
             ) : (
-              <>
-                <section className="cities__places places">
-                  <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">
-                    {offers.length} place
-                    {offers.length > 1 && 's'} to stay in {city}
-                  </b>
-                  <SortingOffers offers={offers} />
-                </section>
-                <div className="cities__right-section">
-                  <Map
-                    environment={ComponentEnvironment.Cities}
-                    offers={offers}
-                    city={city}
-                  />
-                </div>
-              </>
+              <OfferList city={city} />
             )}
           </div>
         </div>

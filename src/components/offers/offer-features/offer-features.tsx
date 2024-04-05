@@ -1,9 +1,10 @@
+import { memo } from 'react';
 import { FullOffer } from '../../../types/offer';
 import { upFirstLetter } from '../../../utils/function';
 
 type OfferFeaturesProps = Pick<FullOffer, 'bedrooms' | 'type' | 'maxAdults'>;
 
-export function OfferFeatures({bedrooms, type, maxAdults}: OfferFeaturesProps) {
+function OfferFeatures_({bedrooms, type, maxAdults}: OfferFeaturesProps) {
   return (
     <ul className="offer__features">
       <li className="offer__feature offer__feature--entire">{upFirstLetter(type)}</li>
@@ -16,3 +17,5 @@ export function OfferFeatures({bedrooms, type, maxAdults}: OfferFeaturesProps) {
     </ul>
   );
 }
+
+export const OfferFeatures = memo(OfferFeatures_);

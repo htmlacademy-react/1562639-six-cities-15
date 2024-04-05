@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { FullOffer } from '../../../types/offer';
 
 const OfferItem = ({ offer }: { offer: string }) => (
@@ -6,7 +7,7 @@ const OfferItem = ({ offer }: { offer: string }) => (
 
 type OfferInsideProps = Pick<FullOffer, 'goods'>
 
-function OfferInside({goods}:OfferInsideProps): JSX.Element {
+function OfferInside_({goods}:OfferInsideProps): JSX.Element {
   return (
     <div className="offer__inside">
       <h2 className="offer__inside-title">What`s inside</h2>
@@ -16,5 +17,7 @@ function OfferInside({goods}:OfferInsideProps): JSX.Element {
     </div>
   );
 }
+
+const OfferInside = memo(OfferInside_);
 
 export default OfferInside;

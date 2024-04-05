@@ -1,4 +1,6 @@
-function FavoritesEmptyPage(): JSX.Element {
+import { memo } from 'react';
+
+function FavoritesEmptyPage_(): JSX.Element {
   return (
     <div className="favorites__status-wrapper">
       <b className="favorites__status">Nothing yet saved.</b>
@@ -8,5 +10,7 @@ function FavoritesEmptyPage(): JSX.Element {
     </div>
   );
 }
+
+const FavoritesEmptyPage = memo(FavoritesEmptyPage_);
 
 export default FavoritesEmptyPage;

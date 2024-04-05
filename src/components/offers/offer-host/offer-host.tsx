@@ -1,9 +1,10 @@
 import classNames from 'classnames';
 import { FullOffer } from '../../../types/offer';
+import { memo } from 'react';
 
 type OfferHostProps = Pick<FullOffer, 'host' | 'description'>
 
-export function OfferHost({host, description} :OfferHostProps) {
+function OfferHost_({host, description} :OfferHostProps) {
   const {avatarUrl, name, isPro} = host;
   return (
     <div className="offer__host">
@@ -30,3 +31,5 @@ export function OfferHost({host, description} :OfferHostProps) {
     </div>
   );
 }
+
+export const OfferHost = memo(OfferHost_);

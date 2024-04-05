@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import { CityName } from '../../constants/const';
 
 type MainEmptyProps = {
   city: CityName;
 };
 
-function MainEmptyPage({ city }: MainEmptyProps): JSX.Element {
+function MainEmptyPage_({ city }: MainEmptyProps): JSX.Element {
   return (
     <>
       <section className="cities__no-places">
@@ -20,5 +21,7 @@ function MainEmptyPage({ city }: MainEmptyProps): JSX.Element {
     </>
   );
 }
+
+const MainEmptyPage = memo(MainEmptyPage_);
 
 export default MainEmptyPage;

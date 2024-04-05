@@ -1,0 +1,26 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  margin: 200px auto;
+  font-size: 19px;
+}
+
+.replay--error {
+  display: block;
+  padding: 9px 21px 6px 11px;
+  font-size: 19px;
+  line-height: 1.211;
+  font-weight: 300;
+  border: none;
+  color: #4481c3;
+  background-color: transparent;
+  -webkit-transition: background .3s, color .3s, text-shadow .3s;
+  transition: background .3s, color .3s, text-shadow .3s;
+
+  &:hover,
+  &:focus {
+    text-shadow: 1px 0 0, 0.5px 0 0, -1px 0 0;
+  }
+}

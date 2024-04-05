@@ -1,4 +1,4 @@
-import { FormEvent, useRef, useState} from 'react';
+import { FormEvent, memo, useCallback, useRef, useState} from 'react';
 import FormRating from '../../form-rating/form-rating';
 import { useActionCreators } from '../../../hooks/store';
 import { reviewActions } from '../../../store/slices/reviews';
@@ -19,19 +19,19 @@ const shouldDisableForm = (form: Form): boolean => {
   return review.length < REVIEW_MIN_LENGTH || review.length > REVIEW_MAX_LENGTH || !rating;
 };
 
-function ReviewsForm({offerId}: {offerId: string}) {
+function ReviewsForm_({offerId}: {offerId: string}) {
   const [isSubmitDisabled, setSubmitDisabled] = useState(true);
   const formRef = useRef(null);
   const {postComment} = useActionCreators(reviewActions);
   const [isDisabled, setDisabled] = useState(false);
 
-  const handleFormChange = (evt: React.FormEvent<HTMLFormElement>) => {
+  const handleFormChange = useCallback((evt: React.FormEvent<HTMLFormElement>) => {
     const form = evt.currentTarget as Form;
 
     setSubmitDisabled(shouldDisableForm(form));
-  };
+  },[]);
 
-  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = useCallback((evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     const form = evt.currentTarget as Form;
     const reviewToSend: ReviewToSend = {
@@ -59,7 +59,7 @@ function ReviewsForm({offerId}: {offerId: string}) {
         }
       }
     });
-  };
+  }, [offerId, postComment]);
 
   return (
     <form className="reviews__form form" action="#" method="post" onChange={handleFormChange} onSubmit={handleFormSubmit} ref={formRef}>
@@ -92,5 +92,7 @@ function ReviewsForm({offerId}: {offerId: string}) {
     </form>
   );
 }
+
+const ReviewsForm = memo(ReviewsForm_);
 
 export default ReviewsForm;
