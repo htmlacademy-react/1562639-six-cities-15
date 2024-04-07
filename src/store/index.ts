@@ -5,6 +5,7 @@ import { createAPI } from '../services/api';
 import { userSlice } from './slices/user';
 import { OfferSlice } from './slices/offer';
 import { reviewSlice } from './slices/reviews';
+import { favoritesSlice } from './slices/favorites';
 
 export const api = createAPI();
 
@@ -14,6 +15,7 @@ export const store = configureStore({
     [OfferSlice.name]: OfferSlice.reducer,
     [userSlice.name]: userSlice.reducer,
     [reviewSlice.name]: reviewSlice.reducer,
+    [favoritesSlice.name]: favoritesSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
