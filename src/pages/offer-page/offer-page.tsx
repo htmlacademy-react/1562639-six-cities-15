@@ -12,7 +12,6 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import NotFoundPage from '../not-found-page/not-found-page';
 import { PremiumMark } from '../../components/premium-mark/premium-mark';
-import classNames from 'classnames';
 import { OfferHost } from '../../components/offers/offer-host/offer-host';
 import { OfferFeatures } from '../../components/offers/offer-features/offer-features';
 import { Rating } from '../../components/rating/rating';
@@ -24,6 +23,7 @@ import { useEffect } from 'react';
 import { Loader } from '../../components/loader/loader';
 import { Reviews } from '../../components/reviews/reviews';
 import { offersActions } from '../../store/slices/offers';
+import { Bookmark } from '../../components/bookmark/bookmark';
 
 const allActions = {
   ...offerActions,
@@ -39,18 +39,20 @@ function OfferPage(): JSX.Element {
   const { fetchNearBy, fetchOffer, setActiveId, fetchComments } =
     useActionCreators(allActions);
 
-  const { id } = useParams() as {id: string};
+  const { id } = useParams();
 
   useEffect(() => {
     setActiveId(id);
-    Promise.all([fetchOffer(id), fetchNearBy(id), fetchComments(id)]);
+    if (id) {
+      Promise.all([fetchOffer(id), fetchNearBy(id), fetchComments(id)]);
+    }
   }, [fetchOffer, fetchNearBy, fetchComments, id, setActiveId]);
 
-  if (status === RequestStatus.Idle || status === RequestStatus.Loading) {
-    <Loader />;
+  if (status === RequestStatus.Idle || status === RequestStatus.Loading || !offer) {
+    return <Loader />;
   }
 
-  if (status === RequestStatus.Failed || !offer) {
+  if (status === RequestStatus.Failed) {
     return <NotFoundPage />;
   }
 
@@ -62,7 +64,6 @@ function OfferPage(): JSX.Element {
     images,
     isPremium,
     title,
-    isFavorite,
     rating,
     type,
     bedrooms,
@@ -87,17 +88,7 @@ function OfferPage(): JSX.Element {
               {isPremium && <PremiumMark className={'offer__mark'} />}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">{title}</h1>
-                <button
-                  className={classNames('offer__bookmark-button button', {
-                    'offer__bookmark-button--active': isFavorite,
-                  })}
-                  type="button"
-                >
-                  <svg className="offer__bookmark-icon" width={31} height={33}>
-                    <use xlinkHref="#icon-bookmark" />
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <Bookmark offerId={id} classStart={'offer'} width={31} height={33} />
               </div>
               <Rating rating={rating} classStart={'offer'} />
               <OfferFeatures

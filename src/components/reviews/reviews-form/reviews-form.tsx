@@ -1,23 +1,10 @@
-import { FormEvent, memo, useCallback, useRef, useState} from 'react';
+import { FormEvent, memo, useRef, useState} from 'react';
 import FormRating from '../../form-rating/form-rating';
 import { useActionCreators } from '../../../hooks/store';
 import { reviewActions } from '../../../store/slices/reviews';
 import { toast } from 'react-toastify';
-import { ReviewToSend } from '../../../types/review';
+import { ReviewForm, normalizeToReviewToSend, shouldDisableForm } from './helper';
 
-const REVIEW_MIN_LENGTH = 50;
-const REVIEW_MAX_LENGTH = 300;
-
-type Form = HTMLFormElement & {
-  rating: RadioNodeList;
-  review: HTMLTextAreaElement;
-}
-
-const shouldDisableForm = (form: Form): boolean => {
-  const rating = form.rating.value;
-  const review = form.review.value;
-  return review.length < REVIEW_MIN_LENGTH || review.length > REVIEW_MAX_LENGTH || !rating;
-};
 
 function ReviewsForm_({offerId}: {offerId: string}) {
   const [isSubmitDisabled, setSubmitDisabled] = useState(true);
@@ -25,24 +12,16 @@ function ReviewsForm_({offerId}: {offerId: string}) {
   const {postComment} = useActionCreators(reviewActions);
   const [isDisabled, setDisabled] = useState(false);
 
-  const handleFormChange = useCallback((evt: React.FormEvent<HTMLFormElement>) => {
-    const form = evt.currentTarget as Form;
+  const handleFormChange = (evt: React.FormEvent<ReviewForm>) => {
+    setSubmitDisabled(shouldDisableForm(evt.currentTarget));
+  };
 
-    setSubmitDisabled(shouldDisableForm(form));
-  },[]);
-
-  const handleFormSubmit = useCallback((evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (evt: FormEvent<ReviewForm>) => {
     evt.preventDefault();
-    const form = evt.currentTarget as Form;
-    const reviewToSend: ReviewToSend = {
-      offerId,
-      body: {
-        comment: form.review.value,
-        rating: +form.rating.value,
-      },
-    };
+    const form = evt.currentTarget;
+    const body = normalizeToReviewToSend(form, offerId);
     setDisabled(true);
-    toast.promise(postComment(reviewToSend).unwrap(), {
+    toast.promise(postComment(body).unwrap(), {
       pending: 'Sending review...',
       success: {
         render: () => {
@@ -59,7 +38,7 @@ function ReviewsForm_({offerId}: {offerId: string}) {
         }
       }
     });
-  }, [offerId, postComment]);
+  };
 
   return (
     <form className="reviews__form form" action="#" method="post" onChange={handleFormChange} onSubmit={handleFormSubmit} ref={formRef}>
