@@ -1,21 +1,20 @@
-import { Link } from 'react-router-dom';
-import { AppRoute } from '../../constants/const';
 import { Helmet } from 'react-helmet-async';
 import { FormEvent, useRef } from 'react';
 import { userActions } from '../../store/slices/user';
 import { useActionCreators } from '../../hooks/store';
+import { RandomCity } from '../../components/random-city/random-city';
+import Header from '../../components/header/header';
 
 type HTMLLoginForm = HTMLFormElement & {
   email: HTMLInputElement;
   password: HTMLInputElement;
 };
 
-
 function LoginPage(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  const {login} = useActionCreators(userActions);
+  const { login } = useActionCreators(userActions);
 
   function handleSubmit(event: FormEvent<HTMLLoginForm>) {
     event.preventDefault();
@@ -23,7 +22,7 @@ function LoginPage(): JSX.Element {
     if (loginRef.current !== null && passwordRef.current !== null) {
       login({
         email: loginRef.current.value,
-        password: passwordRef.current.value
+        password: passwordRef.current.value,
       });
     }
   }
@@ -33,23 +32,7 @@ function LoginPage(): JSX.Element {
       <Helmet>
         <title>6 Cities - Login</title>
       </Helmet>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Link className="header__logo-link" to={AppRoute.Root}>
-                <img
-                  className="header__logo"
-                  src="img/logo.svg"
-                  alt="6 cities logo"
-                  width={81}
-                  height={41}
-                />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
@@ -80,7 +63,6 @@ function LoginPage(): JSX.Element {
                   type="password"
                   name="password"
                   pattern="^(?=.*[a-zA-Z])(?=.*\d).+$"
-                  // ([a-zA-Z0-9]+)
                   placeholder="Password"
                   required
                 />
@@ -93,13 +75,7 @@ function LoginPage(): JSX.Element {
               </button>
             </form>
           </section>
-          <section className="locations locations--login locations--current">
-            <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
-            </div>
-          </section>
+          <RandomCity />
         </div>
       </main>
     </div>

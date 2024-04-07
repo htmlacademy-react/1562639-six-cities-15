@@ -20,7 +20,7 @@ import { Price } from '../../components/price/price';
 import { useActionCreators, useAppSelector } from '../../hooks/store';
 import { offerActions, offerSelector } from '../../store/slices/offer';
 import { reviewActions } from '../../store/slices/reviews';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { Loader } from '../../components/loader/loader';
 import { Reviews } from '../../components/reviews/reviews';
 import { offersActions } from '../../store/slices/offers';
@@ -28,7 +28,7 @@ import { offersActions } from '../../store/slices/offers';
 const allActions = {
   ...offerActions,
   ...reviewActions,
-  ...offersActions
+  ...offersActions,
 };
 
 function OfferPage(): JSX.Element {
@@ -36,31 +36,30 @@ function OfferPage(): JSX.Element {
   const status = useAppSelector(offerSelector.offerStatus);
   const offersNearBy = useAppSelector(offerSelector.nearbyOffers);
 
-  const {fetchNearBy, fetchOffer, setActiveId, fetchComments} = useActionCreators(allActions);
+  const { fetchNearBy, fetchOffer, setActiveId, fetchComments } =
+    useActionCreators(allActions);
 
-  const { id } = useParams() as {id: string};
-  const lastId = useRef(id);
+  const { id } = useParams();
 
   useEffect(() => {
-    const isIdle = status === RequestStatus.Idle;
-    const isChangedId = lastId.current !== id;
-
-    if (id && (isIdle || isChangedId)) {
-      setActiveId(id);
-      lastId.current = id;
+    setActiveId(id);
+    if (id) {
       Promise.all([fetchOffer(id), fetchNearBy(id), fetchComments(id)]);
     }
-  }, [fetchOffer, fetchNearBy, fetchComments, setActiveId, id, status]);
+  }, [fetchOffer, fetchNearBy, fetchComments, id, setActiveId]);
 
-  if (status === RequestStatus.Idle || status === RequestStatus.Loading) {
-    <Loader />;
+  if (status === RequestStatus.Idle || status === RequestStatus.Loading || !offer) {
+    return <Loader />;
   }
 
-  if (status === RequestStatus.Failed || !offer) {
+  if (status === RequestStatus.Failed) {
     return <NotFoundPage />;
   }
 
-  const nearOffersPlusCurrent = [offer, ...offersNearBy.slice(0,NEAR_PLACES_LIMIT)];
+  const nearOffersPlusCurrent = [
+    offer,
+    ...offersNearBy.slice(0, NEAR_PLACES_LIMIT),
+  ];
   const {
     images,
     isPremium,

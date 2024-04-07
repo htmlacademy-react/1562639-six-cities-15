@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { CITIES, ComponentEnvironment } from '../../constants/const';
 import { Offer } from '../../types/offer';
-import PlaceCard from '../../components/place-card/place-card';
+import OfferCard from '../../components/offer-card/offer-card';
 
 type FavoritesListProps = {
   offers: Offer[];
@@ -24,7 +24,7 @@ function FavoritesList({ offers }: FavoritesListProps): JSX.Element {
               </div>
               <div className="favorites__places">
                 {offersByCity.map((offer) => (
-                  <PlaceCard environment={ComponentEnvironment.Favorites} {...offer} key={offer.id} />
+                  <OfferCard environment={ComponentEnvironment.Favorites} {...offer} key={offer.id} />
                 ))}
               </div>
             </li>

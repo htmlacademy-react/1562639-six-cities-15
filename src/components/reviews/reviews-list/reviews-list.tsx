@@ -1,9 +1,10 @@
+import { memo } from 'react';
 import { REVIEWS_LIMIT } from '../../../constants/const';
 import { useAppSelector } from '../../../hooks/store';
 import { reviewsSelectors } from '../../../store/slices/reviews';
 import ReviewsItem from '../reviews-item/reviews-item';
 
-function ReviewsList(): JSX.Element {
+function ReviewsList_(): JSX.Element {
   const reviews = useAppSelector(reviewsSelectors.lastReview);
 
   return (
@@ -16,5 +17,7 @@ function ReviewsList(): JSX.Element {
     </ul>
   );
 }
+
+const ReviewsList = memo(ReviewsList_);
 
 export default ReviewsList;

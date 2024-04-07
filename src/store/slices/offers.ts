@@ -10,11 +10,13 @@ interface OffersState {
   activeId?: FullOffer['id'];
   offers: FullOffer[];
   status: RequestStatus;
+  hasError: boolean;
 }
 
 const initialState: OffersState = {
   offers: [],
   status: RequestStatus.Idle,
+  hasError: false,
 };
 
 const offersSlice = createSlice({
@@ -22,6 +24,7 @@ const offersSlice = createSlice({
     builder
       .addCase(fetchAllOffers.pending, (state) => {
         state.status = RequestStatus.Loading;
+        state.hasError = false;
       })
       .addCase(fetchAllOffers.fulfilled, (state, action) => {
         state.status = RequestStatus.Success;
@@ -29,6 +32,7 @@ const offersSlice = createSlice({
       })
       .addCase(fetchAllOffers.rejected, (state) => {
         state.status = RequestStatus.Failed;
+        state.hasError = true;
       });
   },
   initialState,
@@ -42,6 +46,7 @@ const offersSlice = createSlice({
     activeId: (state: OffersState) => state.activeId,
     offers: (state: OffersState) => state.offers,
     offersStatus: (state: OffersState) => state.status,
+    getErrorStatus: (state: OffersState) => state.hasError,
   },
 });
 

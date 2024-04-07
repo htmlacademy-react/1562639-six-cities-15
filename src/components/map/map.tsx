@@ -1,6 +1,6 @@
 import leaflet, { LayerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useEffect, useRef } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import useMap from '../../hooks/useMap';
 import { Offer } from '../../types/offer';
 import { CITIES, CityName } from '../../constants/const';
@@ -25,7 +25,7 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [13.5, 39],
 });
 
-function Map({
+function Map_({
   environment,
   city,
   offers,
@@ -72,5 +72,7 @@ function Map({
     <section className={`${environment}__map map`} ref={mapRef} />
   );
 }
+
+const Map = memo(Map_);
 
 export default Map;

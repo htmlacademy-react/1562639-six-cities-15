@@ -15,7 +15,7 @@ export function Reviews(): JSX.Element {
         Reviews · <span className="reviews__amount">{reviews.length}</span>
       </h2>
       <ReviewsList />
-      {isAuthorized ? <ReviewsForm offerId={id} /> : <div />}
+      {isAuthorized && <ReviewsForm offerId={id} />}
     </section>
   );
 }

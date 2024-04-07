@@ -2,9 +2,10 @@ import type { ReactNode } from 'react';
 import type { Location } from 'react-router-dom';
 
 import { Navigate, useLocation } from 'react-router-dom';
-import { AppRoute } from '../../constants/const';
+import { AppRoute, AuthorizationStatus } from '../../constants/const';
 import { useAppSelector } from '../../hooks/store';
 import { userSelectors } from '../../store/slices/user';
+import { Loader } from '../loader/loader';
 
 type TProtectedRouteProps = {
   children: ReactNode;
@@ -18,15 +19,19 @@ type FromState = {
 export default function ProtectedRoute({ children, onlyUnAuth}: TProtectedRouteProps) {
   const location: Location<FromState> = useLocation() as Location<FromState>;
 
-  const user = useAppSelector(userSelectors.user);
+  const status = useAppSelector(userSelectors.userStatus);
 
-  if (onlyUnAuth && user) {
+  if (status === AuthorizationStatus.Unknown) {
+    return <Loader />;
+  }
+
+  if (onlyUnAuth && status === AuthorizationStatus.Auth) {
     //Если есть авторизация и страница логина
     const from = location.state?.from || {pathname: AppRoute.Root};
     return <Navigate to={from} />;
   }
 
-  if (!onlyUnAuth && !user) {
+  if (!onlyUnAuth && status === AuthorizationStatus.NoAuth) {
     //Если нет авторизации и не страница логина
     return <Navigate state={{from: location}} to={AppRoute.Login} />;
   }

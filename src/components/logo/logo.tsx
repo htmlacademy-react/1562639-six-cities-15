@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute, CITIES } from '../../constants/const';
+import { memo } from 'react';
 
 type LogoProps = {
   width: number;
@@ -9,7 +10,7 @@ type LogoProps = {
 const cityLinks = CITIES.map((city) => `/${city.slug}`);
 
 
-function Logo({ width, height }: LogoProps) {
+function Logo_({ width, height }: LogoProps) {
   const logoImage = <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={width} height={height} />;
 
   const location = useLocation();
@@ -26,5 +27,7 @@ function Logo({ width, height }: LogoProps) {
     );
   }
 }
+
+const Logo = memo(Logo_);
 
 export default Logo;

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, memo } from 'react';
 import { Offer } from '../../types/offer';
 import { PremiumMark } from '../premium-mark/premium-mark';
 import { Rating } from '../rating/rating';
@@ -9,7 +9,7 @@ import { Price } from '../price/price';
 type HTMLProps = Pick<HTMLAttributes<HTMLElement>, 'onMouseEnter' | 'onMouseLeave'>;
 type OfferProps = Offer & HTMLProps;
 
-function PlaceCard({
+function OfferCard_({
   environment,
   isPremium,
   previewImage,
@@ -75,4 +75,6 @@ function PlaceCard({
   );
 }
 
-export default PlaceCard;
+const OfferCard = memo(OfferCard_);
+
+export default OfferCard;

@@ -2,8 +2,9 @@ import { useLocation } from 'react-router-dom';
 import Logo from '../logo/logo';
 import { AppRoute } from '../../constants/const';
 import Navigation from '../navigation/navigation';
+import { memo } from 'react';
 
-function Header(): JSX.Element {
+function Header_(): JSX.Element {
   const { pathname } = useLocation() as { pathname: AppRoute };
 
   return (
@@ -19,5 +20,7 @@ function Header(): JSX.Element {
     </header>
   );
 }
+
+const Header = memo(Header_);
 
 export default Header;
