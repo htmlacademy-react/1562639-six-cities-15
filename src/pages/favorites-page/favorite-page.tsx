@@ -13,22 +13,22 @@ function FavoritesPage(): JSX.Element {
   const hasFavorites = offers.length > 0;
 
   return (
-    <div className={classNames('page', { 'page--favorites-empty': hasFavorites })}>
+    <div className={classNames('page', { 'page--favorites-empty': !hasFavorites })}>
       <Helmet>
         <title>6 Cities - favorites</title>
       </Helmet>
       <Header />
       <main
         className={classNames('page__main', 'page__main--favorites', {
-          'page__main--favorites-empty': hasFavorites,
+          'page__main--favorites-empty': !hasFavorites,
         })}
       >
         <div className="page__favorites-container container">
           <section className={classNames('favorites', {
-            'favorites--empty' : hasFavorites
+            'favorites--empty' : !hasFavorites
           })}
           >
-            <h1 className={classNames('favorites__title', {'visually-hidden' : !hasFavorites})}>{hasFavorites ? 'Saved listing' : 'Favorites (empty)'}</h1>
+            <h1 className={classNames(hasFavorites ? 'favorites__title' : 'visually-hidden')}>{hasFavorites ? 'Saved listing' : 'Favorites (empty)'}</h1>
             {hasFavorites ? (
               <FavoritesList offers={offers} />
             ) : (

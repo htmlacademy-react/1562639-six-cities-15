@@ -4,7 +4,7 @@ import { Offer } from '../../types/offer';
 import { PremiumMark } from '../premium-mark/premium-mark';
 import { Rating } from '../rating/rating';
 import { Price } from '../price/price';
-import { BookmarkButton } from '../bookmark/bookmark-button';
+import { BookmarkButton } from '../bookmark-button/bookmark-button';
 
 type HTMLProps = Pick<HTMLAttributes<HTMLElement>, 'onMouseEnter' | 'onMouseLeave'>;
 type OfferProps = Offer & HTMLProps;

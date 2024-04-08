@@ -23,7 +23,7 @@ import { useEffect } from 'react';
 import { Loader } from '../../components/loader/loader';
 import { Reviews } from '../../components/reviews/reviews';
 import { offersActions } from '../../store/slices/offers';
-import { BookmarkButton } from '../../components/bookmark/bookmark-button';
+import { BookmarkButton } from '../../components/bookmark-button/bookmark-button';
 
 const allActions = {
   ...offerActions,
@@ -48,11 +48,11 @@ function OfferPage(): JSX.Element {
     }
   }, [fetchOffer, fetchNearBy, fetchComments, id, setActiveId]);
 
-  if (status === RequestStatus.Idle || status === RequestStatus.Loading || !offer) {
+  if (status === RequestStatus.Idle || status === RequestStatus.Loading) {
     return <Loader />;
   }
 
-  if (status === RequestStatus.Failed) {
+  if (status === RequestStatus.Failed || !offer) {
     return <NotFoundPage />;
   }
 
