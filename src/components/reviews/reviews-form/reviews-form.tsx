@@ -63,7 +63,7 @@ function ReviewsForm_({offerId}: {offerId: string}) {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={isSubmitDisabled}
+          disabled={isSubmitDisabled || isDisabled}
         >
           Submit
         </button>

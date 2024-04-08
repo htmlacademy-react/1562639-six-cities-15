@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { useActionCreators } from '../../hooks/store';
 import { offersActions } from '../../store/slices/offers';
 import { MouseEvent } from 'react';
@@ -16,15 +16,15 @@ function SortingOffers_({offers}: SortingOffersProps): JSX.Element {
   const [activeSort, setActiveSort] = useState(SortOption.Popular);
   const { setActiveId } = useActionCreators(offersActions);
 
-  const handleMouseEnter = (evt: MouseEvent<HTMLElement>) => {
+  const handleMouseEnter = useCallback((evt: MouseEvent<HTMLElement>) => {
     const target = evt.currentTarget as HTMLElement;
     const id = target.dataset.id;
     setActiveId(id);
-  };
+  },[setActiveId]);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     setActiveId(undefined);
-  };
+  },[setActiveId]);
 
   let sortedOffers = offers;
 

@@ -1,10 +1,10 @@
-import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { HTMLAttributes, memo } from 'react';
 import { Offer } from '../../types/offer';
 import { PremiumMark } from '../premium-mark/premium-mark';
 import { Rating } from '../rating/rating';
 import { Price } from '../price/price';
+import { BookmarkButton } from '../bookmark-button/bookmark-button';
 
 type HTMLProps = Pick<HTMLAttributes<HTMLElement>, 'onMouseEnter' | 'onMouseLeave'>;
 type OfferProps = Offer & HTMLProps;
@@ -53,17 +53,7 @@ function OfferCard_({
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <Price price={price} classStart={'place-card'} />
-          <button
-            className={classNames('place-card__bookmark-button button', {
-              'place-card__bookmark-button--active': isFavorite,
-            })}
-            type="button"
-          >
-            <svg className="place-card__bookmark-icon" width={18} height={19}>
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <BookmarkButton offerId={id} isFavorite={isFavorite} />
         </div>
         <Rating rating={rating} classStart={'place-card'} />
         <h2 className="place-card__name">

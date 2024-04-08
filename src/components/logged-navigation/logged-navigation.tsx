@@ -1,15 +1,24 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../constants/const';
+import { AppRoute, RequestStatus } from '../../constants/const';
 import { useActionCreators, useAppSelector } from '../../hooks/store';
-import { offersSelectors } from '../../store/slices/offers';
 import { userActions, userSelectors } from '../../store/slices/user';
+import { favoritesActions, favoritesSelectors } from '../../store/slices/favorites';
+import { useEffect } from 'react';
 
 function LoggedNavigation() {
   const user = useAppSelector(userSelectors.user);
   const {logout} = useActionCreators(userActions);
 
-  const offers = useAppSelector(offersSelectors.offers);
-  const favoritesOffers = offers.filter((offer) => offer.isFavorite);
+  const favoritesStatus = useAppSelector(favoritesSelectors.status);
+  const favoritesLength = useAppSelector(favoritesSelectors.favoritesLength);
+  const {fetchFavorites} = useActionCreators(favoritesActions);
+
+  useEffect(() => {
+    if (favoritesStatus === RequestStatus.Idle) {
+      fetchFavorites();
+    }
+  }, [favoritesStatus, fetchFavorites]);
+
   return (
     <ul className="header__nav-list">
       <li className="header__nav-item user">
@@ -23,7 +32,7 @@ function LoggedNavigation() {
           <span className="header__user-name user__name">
             {user?.email}
           </span>
-          <span className="header__favorite-count">{favoritesOffers.length}</span>
+          <span className="header__favorite-count">{favoritesLength}</span>
         </Link>
       </li>
       <li className="header__nav-item">

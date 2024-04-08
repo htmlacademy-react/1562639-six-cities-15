@@ -16,7 +16,7 @@ function NearPlaces({ offers }: NearPlacesProps): JSX.Element {
       <div className="near-places__list places__list">
         {offers.slice(0, NEAR_PLACES_LIMIT).map((offer) => (
           <OfferCard
-            environment={ComponentEnvironment.Cities}
+            environment={ComponentEnvironment.NearPlaces}
             key={`${offer.id}`}
             {...offer}
           />
