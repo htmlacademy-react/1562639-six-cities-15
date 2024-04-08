@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { useActionCreators, useAppSelector } from '../../hooks/store';
+import { useActionCreators } from '../../hooks/store';
 import { favoritesActions } from '../../store/slices/favorites';
 import { useState } from 'react';
 import { FavoriteStatus } from '../../types/favorites';
-import { userSelectors } from '../../store/slices/user';
 import { useNavigate } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../constants/const';
+import { AppRoute } from '../../constants/const';
+import { useAuth } from '../../hooks/useAuth';
 
 interface BookmarkButtonProps {
   classStart?: 'offer' | 'place-card';
@@ -23,10 +23,9 @@ export function BookmarkButton({
   height = 19
 }: BookmarkButtonProps): JSX.Element {
   const [isActive, setIsActive] = useState(isFavorite);
-  const authorizationStatus = useAppSelector(userSelectors.userStatus);
   const {changeFavorite} = useActionCreators(favoritesActions);
   const navigate = useNavigate();
-  const isAuthorized = authorizationStatus === AuthorizationStatus.Auth;
+  const isAuthorized = useAuth();
 
   function handleClick() {
     if (!isAuthorized) {
