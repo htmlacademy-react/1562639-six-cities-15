@@ -51,3 +51,10 @@ export const EndPoint = {
   Logout: '/logout',
   Offers: '/offers',
 };
+
+export const enum CardImageSize {
+  WidthBig = '260',
+  WidthSmall = '150',
+  HeightBig = '200',
+  HeightSmall = '110',
+}

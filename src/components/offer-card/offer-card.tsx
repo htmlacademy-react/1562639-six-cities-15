@@ -5,6 +5,7 @@ import { PremiumMark } from '../premium-mark/premium-mark';
 import { Rating } from '../rating/rating';
 import { Price } from '../price/price';
 import { BookmarkButton } from '../bookmark-button/bookmark-button';
+import { CardImageSize } from '../../constants/const';
 
 type HTMLProps = Pick<HTMLAttributes<HTMLElement>, 'onMouseEnter' | 'onMouseLeave'>;
 type OfferProps = Offer & HTMLProps;
@@ -24,9 +25,9 @@ function OfferCard_({
 }: OfferProps): JSX.Element {
   const imageSize = {
     width:
-      environment === 'cities' || environment === 'near-places' ? 260 : 150,
+      environment === 'cities' || environment === 'near-places' ? CardImageSize.WidthBig : CardImageSize.WidthSmall,
     height:
-      environment === 'cities' || environment === 'near-places' ? 200 : 110,
+      environment === 'cities' || environment === 'near-places' ? CardImageSize.HeightBig : CardImageSize.HeightSmall,
   };
 
   return (
