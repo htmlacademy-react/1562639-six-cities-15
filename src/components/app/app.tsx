@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Route, BrowserRouter, Routes, Navigate } from 'react-router-dom';
 import ProtectedRoute from '../private-route/private-route';
 import { AppRoute, CITIES } from '../../constants/const';
