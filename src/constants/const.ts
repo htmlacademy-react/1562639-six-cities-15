@@ -29,10 +29,6 @@ export const CITIES = [
 
 export type CityName = typeof CITIES[number]['name'];
 
-export const URL_MARKER_DEFAULT = '../../../public/img/pin.svg';
-
-export const URL_MARKER_CURRENT = '../../../public/img/pin-active.svg';
-
 export const IMAGE_LIMIT = 6;
 export const NEAR_PLACES_LIMIT = 3;
 export const REVIEWS_LIMIT = 10;
